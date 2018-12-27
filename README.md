@@ -58,3 +58,4 @@ All pull requests to the main repo must be reviewed by another member of the tea
 * Trevor (Art)
 * DarkKnightKD (Design)
 * Jaron (Level Design, Art)
+* Stark (QA)
