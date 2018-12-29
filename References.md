@@ -11,6 +11,7 @@
 * Actions
   * [Camera](https://www.youtube.com/watch?v=2jTY11Am0Ig)
   * [Shooting in 2d](https://www.youtube.com/watch?v=wkKsl1Mfp5M)
+  * [Input System](https://www.youtube.com/watch?v=Pzd8NhcRzVo)
 * Audio
   * [Audio](https://www.youtube.com/watch?v=6OT43pvUyfY)
 * AI
