@@ -4,11 +4,11 @@ Layers
 0. Default
 1. Transparent FX
 2. Ignore Raycast
-3. __Unity Reserved__
+3. _Unity Reserved_
 4. Water
 5. UI
-6. __Unity Reserved__
-7. __Unity Reserved__
+6. _Unity Reserved_
+7. _Unity Reserved_
 8. Walkable
 9. Non Walkable
 10. Obstacle
