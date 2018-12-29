@@ -2,6 +2,7 @@
 January 2019 Game Jam
 
 ## Getting Started
+Welcome to our project repo! Follow here to learn more.
 
 ### Tools
 
@@ -53,9 +54,8 @@ All pull requests to the main repo must be reviewed by another member of the tea
 * Khadaj (Development, Management)
 * Forevermoore (Music)
 * Kazze (Development)
-* Kirk (Development)
 * MusicMeister (Music, Development)
 * Trevor (Art)
 * DarkKnightKD (Design)
 * Jaron (Level Design, Art)
-* Darksuvius ()
+* Stark (QA)
