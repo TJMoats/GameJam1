@@ -2,10 +2,11 @@
 January 2019 Game Jam
 
 ## Getting Started
+Welcome to our project repo! Follow here to learn more.
 
 ### Tools
 
-In order to contribute to this gamejam, you will the following:
+In order to contribute to this gamejam, you will need the following:
 
 * Unity Version 2018.3
 * Visual Studio Community Edition (Installed with Unity)
@@ -53,9 +54,8 @@ All pull requests to the main repo must be reviewed by another member of the tea
 * Khadaj (Development, Management)
 * Forevermoore (Music)
 * Kazze (Development)
-* Kirk (Development)
 * MusicMeister (Music, Development)
 * Trevor (Art)
 * DarkKnightKD (Design)
 * Jaron (Level Design, Art)
-* Darksuvius ()
+* Stark (QA)
