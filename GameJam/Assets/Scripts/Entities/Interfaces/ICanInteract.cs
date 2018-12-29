@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ICanInteract : MonoBehaviour
+public interface ICanInteract 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void InteractWith(ICanInteract _target);
+    void ReceiveInteraction(ICanInteract _target);
 }
