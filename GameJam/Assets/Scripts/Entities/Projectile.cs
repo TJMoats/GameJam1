@@ -1,17 +1,41 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : Entity
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField, Range(1, 50)]
+    private float speed = 10f;
+
+    [SerializeField]
+    private Vector2 target;
+    public Vector2 Target
     {
-        
+        get => target;
+        set
+        {
+            target = value;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private GameObject targetObject;
+    public GameObject TargetObject
+    {
+        get => TargetObject;
+        set
+        {
+            targetObject = value;
+        }
+    }
+
+    public void SetTarget()
+    {
+
+    }
+
+    private void Start()
     {
         
     }

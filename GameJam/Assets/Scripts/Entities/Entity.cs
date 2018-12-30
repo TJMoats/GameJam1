@@ -3,15 +3,23 @@ using UnityEngine;
 
 public class Entity : SerializedMonoBehaviour
 {
+    private void Awake()
+    {
+        if (SpriteRenderer)
+        {
+            SpriteRenderer.sortingOrder = 10;
+        }    
+    }
+
     [SerializeField]
-    private Sprite sprite;
-    protected Sprite Sprite
+    private SpriteRenderer sprite;
+    protected SpriteRenderer SpriteRenderer
     {
         get
         {
             if (sprite == null)
             {
-                sprite = GetComponentInChildren<Sprite>();
+                sprite = GetComponentInChildren<SpriteRenderer>();
             }
             return sprite;
         }

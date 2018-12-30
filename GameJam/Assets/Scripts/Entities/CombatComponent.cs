@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageable
 {
+    #region IDamageable
     [SerializeField, TitleGroup("Health")]
     private float maxHealth = 5;
     public float MaxHealth
@@ -22,11 +23,23 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
         private set => currentHealth = value;
     }
 
+    public void Damage(float _amount)
+    {
+        CurrentHealth -= _amount;
+    }
+
+    public bool IsAlive()
+    {
+        return CurrentHealth <= 0;
+    }
+    #endregion
+
+    #region IAttackAgent
     [SerializeField, TitleGroup("Combat")]
     private bool canAttack = true;
     public bool CanAttack()
     {
-        return canAttack && RemainingAttackCooldown <= 0;
+        return canAttack && remainingAttackCooldown <= 0;
     }
 
     [SerializeField, Range(1, 10), TitleGroup("Combat")]
@@ -34,16 +47,10 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
     public float AttackCooldown
     {
         get => attackCooldown;
-        private set => attackCooldown = value;
     }
 
     [SerializeField, ReadOnly, TitleGroup("Combat"), ShowIf("CoolingDown"), ProgressBar(0, "AttackCooldown", 1, 0, 0)]
     private float remainingAttackCooldown = 0;
-    public float RemainingAttackCooldown
-    {
-        get => remainingAttackCooldown;
-        private set => remainingAttackCooldown = value;
-    }
 
     public bool CoolingDown
     {
@@ -54,39 +61,63 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
     {
         if (CanAttack())
         {
-            RemainingAttackCooldown = AttackCooldown;
+            if (Projectile != null)
+            {
+                FireProjectile();
+            }
+            else
+            {
+                TriggerAttack();
+            }
+            remainingAttackCooldown = AttackCooldown;
         }
     }
 
-    [SerializeField]
+    private void FireProjectile()
+    {
+
+    }
+
+    private void TriggerAttack()
+    {
+
+    }
+
+    [SerializeField, Range(90, 360)]
     private float attackAngle = 90f;
     public float AttackAngle()
     {
         return attackAngle;
     }
 
+    [SerializeField, Range(1, 10)]
     private float attackRange = 1f;
     public float AttackDistance()
     {
         return attackRange;
     }
-    
-    public void Damage(float _amount)
+
+    [SerializeField, Range(1, 25)]
+    private float visionRange = 10f;
+    public float VisionRange
     {
-        CurrentHealth -= _amount;
+        get => visionRange;
     }
 
-    public bool IsAlive()
+    [SerializeField, PreviewField]
+    private Projectile projectile;
+    public Projectile Projectile
     {
-        return CurrentHealth <= 0;
+        get => projectile;
     }
+    #endregion
 
     private void Update()
     {
-        if (RemainingAttackCooldown > 0)
+        if (remainingAttackCooldown > 0)
         {
-            RemainingAttackCooldown -= Time.deltaTime;
-        }    
+            remainingAttackCooldown -= Time.deltaTime;
+        }
     }
 
     private void OnValidate()

@@ -21,25 +21,11 @@ public class NPCController : Entity
         set => type = value;
     }
 
-    [SerializeField]
-    private bool canFight;
-    public bool CanFight
-    {
-        get => canFight;
-        set => canFight = value;
-    }
-
-    [SerializeField, ShowIf("CanFight")]
     private CombatComponent combatComponent;
     public CombatComponent CombatComponent
     {
         get
         {
-            if (!CanFight)
-            {
-                return null;
-            }
-
             if (combatComponent == null)
             {
                 combatComponent = gameObject.GetOrAddComponent<CombatComponent>();
@@ -63,9 +49,6 @@ public class NPCController : Entity
 
     private void OnValidate()
     {
-        if (CanFight)
-        {
-            combatComponent = gameObject.GetOrAddComponent<CombatComponent>();
-        }
+        
     }
 }
