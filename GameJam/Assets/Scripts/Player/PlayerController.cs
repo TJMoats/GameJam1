@@ -12,22 +12,16 @@ public class PlayerController : SerializedMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void UpdateMovement(InputEventData data)
     {
-        // Update Player movement
-        UpdateInput();
-    }
-
-    private void UpdateInput()
-    {
+        if (data.Handled)
+            return;
         if (Rigidbody2D != null)
         {
-            Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            Vector2 newPosition = Rigidbody2D.position + input * MovementSpeed;
+            Vector2 newPosition = Rigidbody2D.position + data.DPadDirection * MovementSpeed;
             Rigidbody2D.MovePosition(newPosition);
         }
     }
