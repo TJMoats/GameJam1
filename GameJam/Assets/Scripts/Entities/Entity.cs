@@ -1,14 +1,12 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Entity : SerializedMonoBehaviour
 {
     private void Awake()
     {
-        if (SpriteRenderer)
-        {
-            SpriteRenderer.sortingOrder = 10;
-        }
+
     }
 
     private SpriteRenderer spriteRenderer;
@@ -31,7 +29,7 @@ public class Entity : SerializedMonoBehaviour
         {
             if (animator == null)
             {
-                animator = GetComponentInChildren<Animator>();
+                animator = transform.Find("Sprite")?.gameObject.GetComponent<Animator>();
             }
             return animator;
         }

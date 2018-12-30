@@ -21,7 +21,7 @@ public class Weapon : Entity
         flail,
         shoot,
     }
-    
+
     [SerializeField]
     private WeaponType type;
     public WeaponType Type
@@ -50,15 +50,40 @@ public class Weapon : Entity
         get => projectile;
     }
 
+    private Transform projectileAnchor;
+    public Transform ProjectileAnchor
+    {
+        get
+        {
+            if (projectileAnchor == null)
+            {
+                projectileAnchor = transform.Find("ProjectileAnchor");
+                if (projectileAnchor == null)
+                {
+                    GameObject go = new GameObject("ProjectileAnchor");
+                    go.transform.SetParent(transform);
+                    go.transform.localPosition = Vector3.zero;
+                    projectileAnchor = go.transform;
+                }
+            }
+            return projectileAnchor;
+        }
+    }
+
     private bool attacking = false;
 
     public void TriggerAttack()
     {
         attacking = true;
+        Animator.SetTrigger("Attack");
     }
 
     public void FinishAttack()
     {
+        if (Projectile != null)
+        {
+            Projectile shot = Instantiate(Projectile, ProjectileAnchor.position, ProjectileAnchor.rotation, null);
+        }
         attacking = false;
     }
 }

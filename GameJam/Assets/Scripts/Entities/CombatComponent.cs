@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageable
+public class CombatComponent : Entity, IAttackAgent, IDamageable
 {
     private BehaviorTree behaviorTree;
     protected BehaviorTree BehaviorTree
@@ -96,9 +96,11 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
 
     private bool attacking = false;
 
+    [Button]
     public void TriggerAttack()
     {
         attacking = true;
+        Animator.SetTrigger("Attack");
         Weapon.TriggerAttack();
     }
 

@@ -34,7 +34,7 @@ public class NPCController : Entity
             return aiPath;
         }
     }
-    
+
     private CombatComponent combatComponent;
     protected CombatComponent CombatComponent
     {
@@ -96,7 +96,10 @@ public class NPCController : Entity
 
     private void UpdateFacing()
     {
-        HandAnchor.transform.eulerAngles = new Vector3();
+        int direction = 0;
+
+        Animator.SetFloat("Direction", direction);
+        HandAnchor.transform.eulerAngles = new Vector3(0, 0, direction * 90);
     }
 
     private void Update()
