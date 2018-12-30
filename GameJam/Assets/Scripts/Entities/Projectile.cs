@@ -9,6 +9,9 @@ public class Projectile : Entity
     private float speed = 10f;
 
     [SerializeField]
+    private float lifeTime = 10000f;
+
+    [SerializeField]
     private Vector2 target;
     public Vector2 Target
     {

@@ -66,7 +66,7 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
             remainingAttackCooldown = AttackCooldown;
         }
     }
-    
+
     private void TriggerAttack()
     {
 
@@ -93,13 +93,72 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
         get => visionRange;
     }
 
+    private Transform weaponAnchor;
+    protected Transform WeaponAnchor
+    {
+        get
+        {
+            if (weaponAnchor == null)
+            {
+                weaponAnchor = transform.Find("WeaponAnchor");
+                if (weaponAnchor == null)
+                {
+                    GameObject go = new GameObject("WeaponAnchor");
+                    go.transform.parent = transform;
+                    go.transform.localPosition = Vector3.zero;
+                    weaponAnchor = go.transform;
+                }
+            }
+            return weaponAnchor;
+        }
+    }
+
+    [SerializeField, PreviewField]
+    public Weapon weaponPrefab;
     [SerializeField, PreviewField]
     private Weapon weapon;
     public Weapon Weapon
     {
-        get => weapon;
+        get
+        {
+            if (weapon == null && weaponPrefab != null)
+            {
+                weapon = GetComponentInChildren<Weapon>();
+                if (weapon == null && weaponPrefab != null)
+                {
+                    weapon = Instantiate(weaponPrefab);
+                    weapon.transform.parent = WeaponAnchor;
+                    weapon.transform.localPosition = Vector3.zero;
+                }
+            }
+            return weapon;
+        }
+    }
+
+    private bool weaponDrawn = false;
+    public bool WeaponDrawn
+    {
+        get => weaponDrawn;
+        set
+        {
+            weaponDrawn = value;
+            if (Weapon != null)
+            {
+                Weapon.gameObject.SetActive(weaponDrawn);
+            }
+        }
     }
     #endregion
+
+    private void Awake()
+    {
+        CurrentHealth = MaxHealth;
+    }
+
+    private void Start()
+    {
+
+    }
 
     private void Update()
     {
