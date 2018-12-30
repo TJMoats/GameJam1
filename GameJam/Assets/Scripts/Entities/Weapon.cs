@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,11 +38,27 @@ public class Weapon : Entity
 
     [SerializeField]
     private float weaponReach = 2f;
+    public float WeaponReach
+    {
+        get => weaponReach;
+    }
 
-    [SerializeField]
+    [SerializeField, PreviewField]
     private Projectile projectile;
     public Projectile Projectile
     {
         get => projectile;
+    }
+
+    private bool attacking = false;
+
+    public void TriggerAttack()
+    {
+        attacking = true;
+    }
+
+    public void FinishAttack()
+    {
+        attacking = false;
     }
 }

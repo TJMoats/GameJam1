@@ -66,12 +66,7 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
             remainingAttackCooldown = AttackCooldown;
         }
     }
-
-    private void FireProjectile()
-    {
-
-    }
-
+    
     private void TriggerAttack()
     {
 
