@@ -36,6 +36,18 @@ namespace NPS
         {
             get => EnsureLayer("Terrain");
         }
+        public static LayerMask Walkable
+        {
+            get => EnsureLayer("Walkable");
+        }
+        public static LayerMask NonWalkable
+        {
+            get => EnsureLayer("Non Walkable");
+        }
+        public static LayerMask Obstacle
+        {
+            get => EnsureLayer("Obstacle");
+        }
 
         public static string LayerName(int _layerId)
         {

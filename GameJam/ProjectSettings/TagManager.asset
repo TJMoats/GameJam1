@@ -13,9 +13,15 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - Walkable
   - NotWalkable
   - Obstacle
+=======
+  - NotWalkable
+  - 
+  - 
+>>>>>>> 02b75665866d5b72c4d64d9453614b6577cf4d28
   - 
   - 
   - 
@@ -40,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Non Playable
+    uniqueID: 2006226379
+    locked: 0
+  - name: Objects
+    uniqueID: 1270185577
     locked: 0
