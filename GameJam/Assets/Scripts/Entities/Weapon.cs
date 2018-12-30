@@ -21,7 +21,7 @@ public class Weapon : Entity
         flail,
         shoot,
     }
-
+    
     [SerializeField]
     private WeaponType type;
     public WeaponType Type

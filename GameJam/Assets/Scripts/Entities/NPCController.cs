@@ -1,19 +1,14 @@
 ﻿using BehaviorDesigner.Runtime;
+using Pathfinding;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BehaviorTree))]
+[RequireComponent(typeof(Seeker), typeof(AIPath))]
 public class NPCController : Entity
 {
-    public enum NPCType
-    {
-        neutral,
-        friendly,
-        enemy
-    }
-
     [SerializeField]
     private NPCType type;
     public NPCType Type
@@ -22,8 +17,26 @@ public class NPCController : Entity
         set => type = value;
     }
 
+    [SerializeField]
+    private float maxMovementSpeed = 3f;
+    [SerializeField]
+    private float movementAcceleration = 1f;
+
+    private AIPath aiPath;
+    protected AIPath AIPath
+    {
+        get
+        {
+            if (aiPath == null)
+            {
+                aiPath = GetComponent<AIPath>();
+            }
+            return aiPath;
+        }
+    }
+    
     private CombatComponent combatComponent;
-    public CombatComponent CombatComponent
+    protected CombatComponent CombatComponent
     {
         get
         {
@@ -48,8 +61,84 @@ public class NPCController : Entity
         }
     }
 
+    private Transform handAnchor;
+    protected Transform HandAnchor
+    {
+        get
+        {
+            if (handAnchor == null)
+            {
+                handAnchor = transform.Find("HandAnchor");
+                if (handAnchor == null)
+                {
+                    GameObject go = new GameObject("HandAnchor");
+                    go.transform.SetParent(transform);
+                    go.transform.localPosition = Vector3.zero;
+                    handAnchor = go.transform;
+                }
+            }
+            return handAnchor;
+        }
+    }
+
+    private Animator spriteAnimator;
+    protected Animator SpriteAnimator
+    {
+        get
+        {
+            if (spriteAnimator == null)
+            {
+                spriteAnimator = transform.Find("Sprite")?.gameObject?.GetComponent<Animator>();
+            }
+            return spriteAnimator;
+        }
+    }
+
+    private void UpdateFacing()
+    {
+        HandAnchor.transform.eulerAngles = new Vector3();
+    }
+
+    private void Update()
+    {
+        UpdateFacing();
+    }
+
+    private void Start()
+    {
+        InitializePathfinding();
+        InitializeBehaviorTree();
+    }
+
+    private void InitializePathfinding()
+    {
+        AIPath.gravity = new Vector3(0, 0, 0);
+        AIPath.orientation = OrientationMode.YAxisForward;
+        AIPath.maxSpeed = maxMovementSpeed;
+        AIPath.maxAcceleration = movementAcceleration;
+        // If we have a sprite animator, we have 4 direction turning
+        AIPath.enableRotation = (SpriteAnimator == null);
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        if (BehaviorTree != null)
+        {
+            SharedFloat movementSpeed = maxMovementSpeed;
+
+            BehaviorTree.SetVariable("MovementSpeed", movementSpeed);
+        }
+    }
+
     private void OnValidate()
     {
-        
+
+    }
+
+    public enum NPCType
+    {
+        neutral,
+        friendly,
+        enemy
     }
 }

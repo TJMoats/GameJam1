@@ -1,4 +1,5 @@
-﻿using BehaviorDesigner.Runtime.Tactical;
+﻿using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tactical;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,32 @@ using UnityEngine;
 
 public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageable
 {
+    private BehaviorTree behaviorTree;
+    protected BehaviorTree BehaviorTree
+    {
+        get
+        {
+            if (behaviorTree == null)
+            {
+                behaviorTree = GetComponent<BehaviorTree>();
+            }
+            return behaviorTree;
+        }
+    }
+
+    private NPCController npcController;
+    protected NPCController NPCController
+    {
+        get
+        {
+            if (npcController == null)
+            {
+                npcController = GetComponent<NPCController>();
+            }
+            return npcController;
+        }
+    }
+
     #region IDamageable
     [SerializeField, TitleGroup("Health")]
     private float maxHealth = 5;
@@ -67,9 +94,17 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
         }
     }
 
-    private void TriggerAttack()
-    {
+    private bool attacking = false;
 
+    public void TriggerAttack()
+    {
+        attacking = true;
+        Weapon.TriggerAttack();
+    }
+
+    public void FinishAttack()
+    {
+        attacking = false;
     }
 
     [SerializeField, Range(90, 360)]
@@ -81,6 +116,10 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
 
     [SerializeField, Range(1, 10)]
     private float attackRange = 1f;
+    public float AttackRange
+    {
+        get => attackRange;
+    }
     public float AttackDistance()
     {
         return attackRange;
@@ -92,60 +131,18 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
     {
         get => visionRange;
     }
-
-    private Transform weaponAnchor;
-    protected Transform WeaponAnchor
-    {
-        get
-        {
-            if (weaponAnchor == null)
-            {
-                weaponAnchor = transform.Find("WeaponAnchor");
-                if (weaponAnchor == null)
-                {
-                    GameObject go = new GameObject("WeaponAnchor");
-                    go.transform.parent = transform;
-                    go.transform.localPosition = Vector3.zero;
-                    weaponAnchor = go.transform;
-                }
-            }
-            return weaponAnchor;
-        }
-    }
-
-    [SerializeField, PreviewField]
-    public Weapon weaponPrefab;
+    
     [SerializeField, PreviewField]
     private Weapon weapon;
     public Weapon Weapon
     {
         get
         {
-            if (weapon == null && weaponPrefab != null)
+            if (weapon == null)
             {
                 weapon = GetComponentInChildren<Weapon>();
-                if (weapon == null && weaponPrefab != null)
-                {
-                    weapon = Instantiate(weaponPrefab);
-                    weapon.transform.parent = WeaponAnchor;
-                    weapon.transform.localPosition = Vector3.zero;
-                }
             }
             return weapon;
-        }
-    }
-
-    private bool weaponDrawn = false;
-    public bool WeaponDrawn
-    {
-        get => weaponDrawn;
-        set
-        {
-            weaponDrawn = value;
-            if (Weapon != null)
-            {
-                Weapon.gameObject.SetActive(weaponDrawn);
-            }
         }
     }
     #endregion
@@ -157,7 +154,7 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
 
     private void Start()
     {
-
+        InitializeBehaviorTree();
     }
 
     private void Update()
@@ -165,6 +162,18 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
         if (remainingAttackCooldown > 0)
         {
             remainingAttackCooldown -= Time.deltaTime;
+        }
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        if (BehaviorTree != null)
+        {
+            SharedFloat visionRange = VisionRange;
+            SharedFloat attackRange = AttackRange;
+
+            BehaviorTree.SetVariable("VisionRange", visionRange);
+            BehaviorTree.SetVariable("AttackRange", attackRange);
         }
     }
 
