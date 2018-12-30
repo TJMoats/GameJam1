@@ -13,10 +13,7 @@ public class Projectile : Entity
     public Vector2 Target
     {
         get => target;
-        set
-        {
-            target = value;
-        }
+        set => target = value;
     }
 
     [SerializeField]
@@ -24,10 +21,7 @@ public class Projectile : Entity
     public GameObject TargetObject
     {
         get => TargetObject;
-        set
-        {
-            targetObject = value;
-        }
+        set => targetObject = value;
     }
 
     public void SetTarget()

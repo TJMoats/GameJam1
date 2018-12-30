@@ -8,20 +8,32 @@ public class Entity : SerializedMonoBehaviour
         if (SpriteRenderer)
         {
             SpriteRenderer.sortingOrder = 10;
-        }    
+        }
     }
 
-    [SerializeField]
-    private SpriteRenderer sprite;
+    private SpriteRenderer spriteRenderer;
     protected SpriteRenderer SpriteRenderer
     {
         get
         {
-            if (sprite == null)
+            if (spriteRenderer == null)
             {
-                sprite = GetComponentInChildren<SpriteRenderer>();
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             }
-            return sprite;
+            return spriteRenderer;
+        }
+    }
+
+    private Animator animator;
+    protected Animator Animator
+    {
+        get
+        {
+            if (animator == null)
+            {
+                animator = GetComponentInChildren<Animator>();
+            }
+            return animator;
         }
     }
 

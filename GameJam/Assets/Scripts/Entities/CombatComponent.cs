@@ -61,14 +61,8 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
     {
         if (CanAttack())
         {
-            if (Projectile != null)
-            {
-                FireProjectile();
-            }
-            else
-            {
-                TriggerAttack();
-            }
+            TriggerAttack();
+
             remainingAttackCooldown = AttackCooldown;
         }
     }
@@ -105,10 +99,10 @@ public class CombatComponent : SerializedMonoBehaviour, IAttackAgent, IDamageabl
     }
 
     [SerializeField, PreviewField]
-    private Projectile projectile;
-    public Projectile Projectile
+    private Weapon weapon;
+    public Weapon Weapon
     {
-        get => projectile;
+        get => weapon;
     }
     #endregion
 
