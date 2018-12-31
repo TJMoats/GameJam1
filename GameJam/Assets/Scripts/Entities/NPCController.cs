@@ -1,18 +1,14 @@
 ﻿using BehaviorDesigner.Runtime;
+using Pathfinding;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BehaviorTree))]
+[RequireComponent(typeof(Seeker), typeof(AIPath))]
 public class NPCController : Entity
 {
-    public enum NPCType
-    {
-        neutral,
-        friendly,
-        enemy
-    }
-
     [SerializeField]
     private NPCType type;
     public NPCType Type
@@ -22,24 +18,28 @@ public class NPCController : Entity
     }
 
     [SerializeField]
-    private bool canFight;
-    public bool CanFight
-    {
-        get => canFight;
-        set => canFight = value;
-    }
+    private float maxMovementSpeed = 3f;
+    [SerializeField]
+    private float movementAcceleration = 1f;
 
-    [SerializeField, ShowIf("CanFight")]
-    private CombatComponent combatComponent;
-    public CombatComponent CombatComponent
+    private AIPath aiPath;
+    protected AIPath AIPath
     {
         get
         {
-            if (!CanFight)
+            if (aiPath == null)
             {
-                return null;
+                aiPath = GetComponent<AIPath>();
             }
+            return aiPath;
+        }
+    }
 
+    private CombatComponent combatComponent;
+    protected CombatComponent CombatComponent
+    {
+        get
+        {
             if (combatComponent == null)
             {
                 combatComponent = gameObject.GetOrAddComponent<CombatComponent>();
@@ -61,11 +61,127 @@ public class NPCController : Entity
         }
     }
 
+    private Transform rotationAnchor;
+    protected Transform RotationAnchor
+    {
+        get
+        {
+            if (rotationAnchor == null)
+            {
+                rotationAnchor = transform.Find("RotationAnchor");
+                if (rotationAnchor == null)
+                {
+                    GameObject go = new GameObject("RotationAnchor");
+                    go.transform.SetParent(transform);
+                    go.transform.localPosition = Vector3.zero;
+                    rotationAnchor = go.transform;
+                }
+            }
+            return rotationAnchor;
+        }
+    }
+
+    private Animator spriteAnimator;
+    protected Animator SpriteAnimator
+    {
+        get
+        {
+            if (spriteAnimator == null)
+            {
+                spriteAnimator = transform.Find("Sprite")?.gameObject?.GetComponent<Animator>();
+            }
+            return spriteAnimator;
+        }
+    }
+
+    [SerializeField]
+    private Direction facing = Direction.down;
+    private void UpdateFacing()
+    {
+        Vector3 direction = transform.position - AIPath.steeringTarget;
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            // Left or right
+            facing = direction.x > 0 ? Direction.left : Direction.right;
+        }
+        else
+        {
+            // Up or down
+            facing = direction.y > 0 ? Direction.down : Direction.up;
+        }
+        
+        Animator.SetFloat("Direction", (int)facing);
+        RotationAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
+        if (CombatComponent != null)
+        {
+            if (facing == Direction.up)
+            {
+                CombatComponent.Weapon.SpriteRenderer.sortingOrder = SpriteRenderer.sortingOrder - 1;
+            }
+            else
+            {
+                CombatComponent.Weapon.SpriteRenderer.sortingOrder = SpriteRenderer.sortingOrder +1;
+            }
+        }
+    }
+
+    private bool moving = false;
+    private void UpdateMovement()
+    {
+        moving = (AIPath.velocity.magnitude > 0);
+        Animator.SetBool("Moving", moving);
+    }
+
+    private void Update()
+    {
+        UpdateFacing();
+        UpdateMovement();
+    }
+
+    private void Start()
+    {
+        InitializePathfinding();
+        InitializeBehaviorTree();
+    }
+
+    private void InitializePathfinding()
+    {
+        AIPath.gravity = new Vector3(0, 0, 0);
+        AIPath.orientation = OrientationMode.YAxisForward;
+        AIPath.maxSpeed = maxMovementSpeed;
+        AIPath.maxAcceleration = movementAcceleration;
+        // If we have a sprite animator, we have 4 direction turning
+        AIPath.enableRotation = (SpriteAnimator == null);
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        if (BehaviorTree != null)
+        {
+            SharedFloat movementSpeed = maxMovementSpeed;
+
+            BehaviorTree.SetVariable("MovementSpeed", movementSpeed);
+        }
+    }
+
     private void OnValidate()
     {
-        if (CanFight)
-        {
-            combatComponent = gameObject.GetOrAddComponent<CombatComponent>();
-        }
+        Animator.SetFloat("Direction", (int)facing);
+        RotationAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
+    }
+
+    public enum NPCType
+    {
+        neutral,
+        friendly,
+        enemy
+    }
+
+    public enum Direction
+    {
+        down = 0,
+        left = 1,
+        up = 2,
+        right = 3
     }
 }

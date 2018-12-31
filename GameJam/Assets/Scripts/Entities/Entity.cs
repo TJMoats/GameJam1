@@ -1,19 +1,37 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Entity : SerializedMonoBehaviour
 {
-    [SerializeField]
-    private Sprite sprite;
-    protected Sprite Sprite
+    private void Awake()
+    {
+
+    }
+
+    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer
     {
         get
         {
-            if (sprite == null)
+            if (spriteRenderer == null)
             {
-                sprite = GetComponentInChildren<Sprite>();
+                spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             }
-            return sprite;
+            return spriteRenderer;
+        }
+    }
+
+    private Animator animator;
+    protected Animator Animator
+    {
+        get
+        {
+            if (animator == null)
+            {
+                animator = transform.Find("Sprite")?.gameObject.GetComponent<Animator>();
+            }
+            return animator;
         }
     }
 
