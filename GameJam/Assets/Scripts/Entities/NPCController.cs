@@ -94,12 +94,25 @@ public class NPCController : Entity
         }
     }
 
+    [SerializeField]
+    private Direction facing = Direction.down;
     private void UpdateFacing()
     {
-        int direction = 0;
-
-        Animator.SetFloat("Direction", direction);
-        HandAnchor.transform.eulerAngles = new Vector3(0, 0, direction * 90);
+        Vector3 direction = transform.position - aiPath.steeringTarget;
+        Debug.Log(direction);
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            // Left or right
+            facing = direction.x > 0 ? Direction.left : Direction.right;
+        }
+        else
+        {
+            // Up or down
+            facing = direction.y > 0 ? Direction.down : Direction.up;
+        }
+        
+        Animator.SetFloat("Direction", (int)facing);
+        HandAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
     }
 
     private void Update()
@@ -135,7 +148,8 @@ public class NPCController : Entity
 
     private void OnValidate()
     {
-
+        Animator.SetFloat("Direction", (int)facing);
+        HandAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
     }
 
     public enum NPCType
@@ -143,5 +157,13 @@ public class NPCController : Entity
         neutral,
         friendly,
         enemy
+    }
+
+    public enum Direction
+    {
+        down = 0,
+        left = 1,
+        up = 2,
+        right = 3
     }
 }
