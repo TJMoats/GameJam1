@@ -10,7 +10,7 @@ public class Entity : SerializedMonoBehaviour
     }
 
     private SpriteRenderer spriteRenderer;
-    protected SpriteRenderer SpriteRenderer
+    public SpriteRenderer SpriteRenderer
     {
         get
         {
