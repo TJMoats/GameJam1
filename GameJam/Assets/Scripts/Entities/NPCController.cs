@@ -61,23 +61,23 @@ public class NPCController : Entity
         }
     }
 
-    private Transform handAnchor;
-    protected Transform HandAnchor
+    private Transform rotationAnchor;
+    protected Transform RotationAnchor
     {
         get
         {
-            if (handAnchor == null)
+            if (rotationAnchor == null)
             {
-                handAnchor = transform.Find("HandAnchor");
-                if (handAnchor == null)
+                rotationAnchor = transform.Find("RotationAnchor");
+                if (rotationAnchor == null)
                 {
-                    GameObject go = new GameObject("HandAnchor");
+                    GameObject go = new GameObject("RotationAnchor");
                     go.transform.SetParent(transform);
                     go.transform.localPosition = Vector3.zero;
-                    handAnchor = go.transform;
+                    rotationAnchor = go.transform;
                 }
             }
-            return handAnchor;
+            return rotationAnchor;
         }
     }
 
@@ -98,8 +98,7 @@ public class NPCController : Entity
     private Direction facing = Direction.down;
     private void UpdateFacing()
     {
-        Vector3 direction = transform.position - aiPath.steeringTarget;
-        Debug.Log(direction);
+        Vector3 direction = transform.position - AIPath.steeringTarget;
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
             // Left or right
@@ -112,12 +111,31 @@ public class NPCController : Entity
         }
         
         Animator.SetFloat("Direction", (int)facing);
-        HandAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
+        RotationAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
+        if (CombatComponent != null)
+        {
+            if (facing == Direction.up)
+            {
+                CombatComponent.Weapon.SpriteRenderer.sortingOrder = SpriteRenderer.sortingOrder - 1;
+            }
+            else
+            {
+                CombatComponent.Weapon.SpriteRenderer.sortingOrder = SpriteRenderer.sortingOrder +1;
+            }
+        }
+    }
+
+    private bool moving = false;
+    private void UpdateMovement()
+    {
+        moving = (AIPath.velocity.magnitude > 0);
+        Animator.SetBool("Moving", moving);
     }
 
     private void Update()
     {
         UpdateFacing();
+        UpdateMovement();
     }
 
     private void Start()
@@ -149,7 +167,7 @@ public class NPCController : Entity
     private void OnValidate()
     {
         Animator.SetFloat("Direction", (int)facing);
-        HandAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
+        RotationAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
     }
 
     public enum NPCType
