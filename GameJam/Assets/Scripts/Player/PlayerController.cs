@@ -1,22 +1,40 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class PlayerController : SerializedMonoBehaviour
+public class PlayerController : Entity
 {
     [SerializeField]
     private InputMaster controls;
+    [SerializeField]
+    private Vector2 movementDirection = Vector2.zero;
+    [SerializeField]
+    private float accelerationSpeed = 3;
+    [SerializeField]
+    private float maxMovementSpeed = 10;
+    private float sqrMaxMovementSpeed;
 
     private void Awake()
     {
-        Debug.Log("Awake!");
         controls.Player.Attack.performed += ctx => Attack();
         controls.Player.Interact.performed += ctx => Interact();
         controls.Player.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
+
+        sqrMaxMovementSpeed = Mathf.Sqrt(maxMovementSpeed);
     }
 
     private void Start()
     {
 
+    }
+
+    private void FixedUpdate()
+    {
+        Rigidbody.AddForce(movementDirection * accelerationSpeed);
+        if (Rigidbody.velocity.sqrMagnitude > sqrMaxMovementSpeed)
+        {
+            Debug.Log("Slowing down!");
+            Rigidbody.velocity = Rigidbody.velocity.normalized * maxMovementSpeed;
+        }
     }
 
     private void Attack()
@@ -31,7 +49,7 @@ public class PlayerController : SerializedMonoBehaviour
 
     private void Move(Vector2 _direction)
     {
-        Debug.Log($"Move ${_direction}");
+        movementDirection = _direction;
     }
 
     private void OnEnable()

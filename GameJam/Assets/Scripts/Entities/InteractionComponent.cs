@@ -1,13 +1,13 @@
 ﻿using Sirenix.OdinInspector;
 
-public class InteractionComponent : SerializedMonoBehaviour, ICanInteract
+public class InteractionComponent : SerializedMonoBehaviour
 {
-    public void InteractWith(ICanInteract _target)
+    public void InteractWith(InteractableComponent _target)
     {
         throw new System.NotImplementedException();
     }
 
-    public void ReceiveInteraction(ICanInteract _target)
+    public InteractableComponent CheckForInteractable()
     {
         throw new System.NotImplementedException();
     }
