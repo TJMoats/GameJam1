@@ -61,26 +61,6 @@ public class NPCController : Entity
         }
     }
 
-    private Transform rotationAnchor;
-    protected Transform RotationAnchor
-    {
-        get
-        {
-            if (rotationAnchor == null)
-            {
-                rotationAnchor = transform.Find("RotationAnchor");
-                if (rotationAnchor == null)
-                {
-                    GameObject go = new GameObject("RotationAnchor");
-                    go.transform.SetParent(transform);
-                    go.transform.localPosition = Vector3.zero;
-                    rotationAnchor = go.transform;
-                }
-            }
-            return rotationAnchor;
-        }
-    }
-
     private Animator spriteAnimator;
     protected Animator SpriteAnimator
     {
@@ -111,18 +91,6 @@ public class NPCController : Entity
         }
         
         Animator.SetFloat("Direction", (int)facing);
-        RotationAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
-        if (CombatComponent != null)
-        {
-            if (facing == Direction.up)
-            {
-                CombatComponent.Weapon.SpriteRenderer.sortingOrder = SpriteRenderer.sortingOrder - 1;
-            }
-            else
-            {
-                CombatComponent.Weapon.SpriteRenderer.sortingOrder = SpriteRenderer.sortingOrder +1;
-            }
-        }
     }
 
     private bool moving = false;
@@ -167,7 +135,6 @@ public class NPCController : Entity
     private void OnValidate()
     {
         Animator.SetFloat("Direction", (int)facing);
-        RotationAnchor.transform.eulerAngles = new Vector3(0, 0, (int)facing * -90);
     }
 
     public enum NPCType

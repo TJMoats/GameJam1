@@ -54,8 +54,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Rigidbody2D: {fileID: 7812073969453557420}
-  MovementSpeed: 0.2
+  controls:
+    m_Asset: {fileID: 11400000, guid: 845fa9c4f2deea043b6a30cb22eafa71, type: 3}
 --- !u!50 &7812073969453557420
 Rigidbody2D:
   serializedVersion: 4
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d1b79f45c8a5c5945adbe96d78a05ae8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
