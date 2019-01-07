@@ -10,16 +10,13 @@ public class PlayerController : Entity
     [SerializeField]
     private float accelerationSpeed = 3;
     [SerializeField]
-    private float maxMovementSpeed = 10;
-    private float sqrMaxMovementSpeed;
+    private float movementSpeed = 10;
 
     private void Awake()
     {
         controls.Player.Attack.performed += ctx => Attack();
         controls.Player.Interact.performed += ctx => Interact();
         controls.Player.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
-
-        sqrMaxMovementSpeed = Mathf.Sqrt(maxMovementSpeed);
     }
 
     private void Start()
@@ -29,12 +26,7 @@ public class PlayerController : Entity
 
     private void FixedUpdate()
     {
-        Rigidbody.AddForce(movementDirection * accelerationSpeed);
-        if (Rigidbody.velocity.sqrMagnitude > sqrMaxMovementSpeed)
-        {
-            Debug.Log("Slowing down!");
-            Rigidbody.velocity = Rigidbody.velocity.normalized * maxMovementSpeed;
-        }
+        Rigidbody.velocity = movementDirection * movementSpeed;
     }
 
     private void Attack()
@@ -54,13 +46,11 @@ public class PlayerController : Entity
 
     private void OnEnable()
     {
-        Debug.Log("Enabled!");
         controls.Enable();
     }
 
     private void OnDisable()
     {
-        Debug.Log("Disabled!");
         controls.Disable();
     }
 }
