@@ -1,8 +1,6 @@
 ﻿using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tactical;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CombatComponent : Entity, IAttackAgent, IDamageable
@@ -101,7 +99,6 @@ public class CombatComponent : Entity, IAttackAgent, IDamageable
     {
         attacking = true;
         Animator.SetTrigger("Attack");
-        Weapon.TriggerAttack();
     }
 
     public void FinishAttack()
@@ -134,19 +131,6 @@ public class CombatComponent : Entity, IAttackAgent, IDamageable
         get => visionRange;
     }
     
-    [SerializeField, PreviewField]
-    private Weapon weapon;
-    public Weapon Weapon
-    {
-        get
-        {
-            if (weapon == null)
-            {
-                weapon = GetComponentInChildren<Weapon>();
-            }
-            return weapon;
-        }
-    }
     #endregion
 
     private void Awake()

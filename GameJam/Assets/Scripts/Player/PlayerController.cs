@@ -1,69 +1,61 @@
 ﻿using Sirenix.OdinInspector;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : SerializedMonoBehaviour
+public class PlayerController : CharacterController
 {
-    public Rigidbody2D Rigidbody2D;
-    public float MovementSpeed = 10.0f;
-    private Vector2 playerFacing;
+    [SerializeField]
+    private InputMaster controls;
+    [SerializeField]
+    private Vector2 movementDirection = Vector2.zero;
+    [SerializeField]
+    private float accelerationSpeed = 3;
+    [SerializeField]
+    private float movementSpeed = 10;
 
-    // Start is called before the first frame update
-    void Start()
+    public override bool Moving
     {
-
+        get => movementDirection != Vector2.zero;
     }
 
-    public void UpdateMovement(InputEventData data)
+    public override Vector2 MovementDirection
     {
-        
+        get => movementDirection * -1;
     }
 
-    public void UpdateActions(InputEventData data)
+    private void Awake()
     {
-        // State machine this?
-        if (data.Handled)
-            return;
-
-        // Movement
-        if (Rigidbody2D != null)
-        {
-            Vector2 newPosition = Rigidbody2D.position + data.DPadDirection * MovementSpeed;
-            Rigidbody2D.MovePosition(newPosition);
-            playerFacing = data.DPadDirection;
-        }
-
-        // Actions
-        if (data.KeyStateMap[InputKeys.InteractionAction] == InputKeyState.DownThisFrame)
-        {
-            PerformInteractionAction();
-        }
-        //else if (data.KeyStateMap[InputKeys.BasicAction] == InputKeyState.DownThisFrame)
-        //{
-        //    PerformBasicAction();
-        //}
-        //else if (data.KeyStateMap[InputKeys.SecondaryAction] == InputKeyState.DownThisFrame)
-        //{
-        //    PerformSecondaryAction();
-        //}
-        //else if (data.KeyStateMap[InputKeys.ShieldAction] == InputKeyState.DownThisFrame)
-        //{
-            
-        //}
+        controls.Player.Attack.performed += ctx => AttackAction();
+        controls.Player.Interact.performed += ctx => InteractAction();
+        controls.Player.Movement.performed += ctx => MoveAction(ctx.ReadValue<Vector2>());
     }
 
-    private void PerformInteractionAction()
+    private void FixedUpdate()
     {
-        // Interaction logic - Player -> Object/NPC
-        Vector2 targetPosition = Rigidbody2D.position;
-        Debug.DrawLine(Rigidbody2D.position, Rigidbody2D.position + playerFacing);
-        var hitTarget = Physics2D.Raycast(Rigidbody2D.position, playerFacing, 1.0f);
-        InteractionComponent interactionTarget = hitTarget.collider.GetComponent<InteractionComponent>();
-        if (interactionTarget != null)
-        {
-            
-        }
+        Rigidbody.velocity = movementDirection * movementSpeed;
+    }
+
+    private void AttackAction()
+    {
+        Debug.Log("Attack!");
+    }
+
+    private void InteractAction()
+    {
+        Debug.Log("Interact!");
+    }
+
+    private void MoveAction(Vector2 _direction)
+    {
+        movementDirection = _direction;
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 }
