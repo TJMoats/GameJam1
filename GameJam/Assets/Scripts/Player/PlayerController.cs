@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class PlayerController : Entity
+public class PlayerController : CharacterController
 {
     [SerializeField]
     private InputMaster controls;
@@ -12,16 +12,21 @@ public class PlayerController : Entity
     [SerializeField]
     private float movementSpeed = 10;
 
-    private void Awake()
+    public override bool Moving
     {
-        controls.Player.Attack.performed += ctx => Attack();
-        controls.Player.Interact.performed += ctx => Interact();
-        controls.Player.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
+        get => movementDirection != Vector2.zero;
     }
 
-    private void Start()
+    public override Vector2 MovementDirection
     {
+        get => movementDirection * -1;
+    }
 
+    private void Awake()
+    {
+        controls.Player.Attack.performed += ctx => AttackAction();
+        controls.Player.Interact.performed += ctx => InteractAction();
+        controls.Player.Movement.performed += ctx => MoveAction(ctx.ReadValue<Vector2>());
     }
 
     private void FixedUpdate()
@@ -29,17 +34,17 @@ public class PlayerController : Entity
         Rigidbody.velocity = movementDirection * movementSpeed;
     }
 
-    private void Attack()
+    private void AttackAction()
     {
         Debug.Log("Attack!");
     }
 
-    private void Interact()
+    private void InteractAction()
     {
         Debug.Log("Interact!");
     }
 
-    private void Move(Vector2 _direction)
+    private void MoveAction(Vector2 _direction)
     {
         movementDirection = _direction;
     }

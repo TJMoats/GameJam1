@@ -7,7 +7,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BehaviorTree))]
 [RequireComponent(typeof(Seeker), typeof(AIPath))]
-public class NPCController : Entity
+public class NPCController : CharacterController
 {
     [SerializeField]
     private NPCType type;
@@ -15,6 +15,15 @@ public class NPCController : Entity
     {
         get => type;
         set => type = value;
+    }
+
+    public override bool Moving
+    {
+        get => AIPath.velocity.magnitude > 0;
+    }
+    public override Vector2 MovementDirection
+    {
+        get => transform.position - AIPath.steeringTarget;
     }
 
     [SerializeField]
@@ -61,50 +70,20 @@ public class NPCController : Entity
         }
     }
 
-    private Animator spriteAnimator;
-    protected Animator SpriteAnimator
+    private CharacterSpriteAnimationController animationController;
+    protected CharacterSpriteAnimationController AnimationController
     {
         get
         {
-            if (spriteAnimator == null)
+            if (animationController == null)
             {
-                spriteAnimator = transform.Find("Sprite")?.gameObject?.GetComponent<Animator>();
+                animationController = GetComponentInChildren<CharacterSpriteAnimationController>();
             }
-            return spriteAnimator;
+            return animationController;
         }
     }
 
-    [SerializeField]
-    private Direction facing = Direction.down;
-    private void UpdateFacing()
-    {
-        Vector3 direction = transform.position - AIPath.steeringTarget;
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-        {
-            // Left or right
-            facing = direction.x > 0 ? Direction.left : Direction.right;
-        }
-        else
-        {
-            // Up or down
-            facing = direction.y > 0 ? Direction.down : Direction.up;
-        }
-        
-        Animator.SetFloat("Direction", (int)facing);
-    }
 
-    private bool moving = false;
-    private void UpdateMovement()
-    {
-        moving = (AIPath.velocity.magnitude > 0);
-        Animator.SetBool("Moving", moving);
-    }
-
-    private void Update()
-    {
-        UpdateFacing();
-        UpdateMovement();
-    }
 
     private void Start()
     {
@@ -119,7 +98,7 @@ public class NPCController : Entity
         AIPath.maxSpeed = maxMovementSpeed;
         AIPath.maxAcceleration = movementAcceleration;
         // If we have a sprite animator, we have 4 direction turning
-        AIPath.enableRotation = (SpriteAnimator == null);
+        AIPath.enableRotation = false;
     }
 
     private void InitializeBehaviorTree()
@@ -134,7 +113,7 @@ public class NPCController : Entity
 
     private void OnValidate()
     {
-        Animator.SetFloat("Direction", (int)facing);
+
     }
 
     public enum NPCType
@@ -144,11 +123,4 @@ public class NPCController : Entity
         enemy
     }
 
-    public enum Direction
-    {
-        down = 0,
-        left = 1,
-        up = 2,
-        right = 3
-    }
 }
