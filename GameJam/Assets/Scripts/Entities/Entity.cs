@@ -1,7 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Entity : SerializedMonoBehaviour
 {
     private void Awake()

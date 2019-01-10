@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 
-public class InteractableComponent : SerializedMonoBehaviour
+public class InteractableComponent : Entity
 {
     public void ReceiveInteraction(InteractionComponent _target)
     {
