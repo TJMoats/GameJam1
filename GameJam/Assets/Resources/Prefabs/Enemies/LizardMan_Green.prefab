@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1684931229}
   - component: {fileID: 1684931230}
   - component: {fileID: 1684931231}
+  - component: {fileID: 1978082606}
   m_Layer: 0
   m_Name: LizardMan_Green
   m_TagString: Untagged
@@ -61,7 +62,6 @@ MonoBehaviour:
   type: 2
   maxMovementSpeed: 3
   movementAcceleration: 1
-  facing: 2
 --- !u!114 &5598165850691840969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +91,6 @@ MonoBehaviour:
   attackAngle: 90
   attackRange: 1
   visionRange: 10
-  weapon: {fileID: 0}
 --- !u!50 &1684931234
 Rigidbody2D:
   serializedVersion: 4
@@ -112,7 +111,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1684931229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +213,22 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.6.1
+--- !u!70 &1978082606
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598165850691840968}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1 &5598165851372007315
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +241,7 @@ GameObject:
   - component: {fileID: 5598165851372007318}
   - component: {fileID: 5598165851372007317}
   - component: {fileID: 1863636391}
+  - component: {fileID: 1303778860}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -242,7 +258,7 @@ Transform:
   m_GameObject: {fileID: 5598165851372007315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 5598165850691840971}
   m_RootOrder: 0
@@ -283,7 +299,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ea8f970041cd7514fb9becb6b4801e1e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -335,3 +351,25 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!114 &1303778860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5598165851372007315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5ccd8d7f6205a498660ba5243826ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  facing: 0
