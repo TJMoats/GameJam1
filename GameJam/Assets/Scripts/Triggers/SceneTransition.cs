@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : Trigger
 {
-    private Scene
     private void OnTriggerEnter2D(Collider2D _collision)
     {
         if (_collision.gameObject.tag == "Player")
@@ -17,6 +16,6 @@ public class SceneTransition : Trigger
 
     private void SwitchScene()
     {
-        SceneManager.LoadScene()
+
     }
 }
