@@ -64,6 +64,7 @@
     <Compile Include="Assets\Behaviors\Actions\RangedLineAttack.cs" />
     <Compile Include="Assets\Behaviors\Actions\RangedSeekAttack.cs" />
     <Compile Include="Assets\CombatAnimationEventReceiver.cs" />
+    <Compile Include="Assets\QuickSnap.cs" />
     <Compile Include="Assets\Scripts\Config\Config.cs" />
     <Compile Include="Assets\Scripts\Entities\Characters\NPCs\NPCController.cs" />
     <Compile Include="Assets\Scripts\Entities\Characters\Player\PlayerController.cs" />
@@ -82,6 +83,8 @@
     <Compile Include="Assets\Scripts\Helpers\LayerHelper.cs" />
     <Compile Include="Assets\Scripts\Input\InputMaster.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Triggers\SceneTransition.cs" />
+    <Compile Include="Assets\Scripts\Triggers\Trigger.cs" />
     <Compile Include="Assets\Scripts\UI\InGameMenu.cs" />
     <Compile Include="Assets\Scripts\UI\InGameUI.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuCamera.cs" />

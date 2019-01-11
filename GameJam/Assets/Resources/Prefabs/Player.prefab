@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7812073969453557420}
   - component: {fileID: 1800845663}
   - component: {fileID: 1800845664}
+  - component: {fileID: 5673630380491843062}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -132,6 +133,22 @@ MonoBehaviour:
   attackAngle: 90
   attackRange: 1
   visionRange: 10
+--- !u!70 &5673630380491843062
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3840522753330019241}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.56666666, y: 0.96666664}
+  m_Direction: 0
 --- !u!1 &3840522754076510981
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3840522754076510982}
   - component: {fileID: 3840522754076510983}
-  - component: {fileID: 7874191761706781793}
   - component: {fileID: 1661982630}
   - component: {fileID: 1661982631}
   m_Layer: 0
@@ -214,22 +230,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &7874191761706781793
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3840522754076510981}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.56666666, y: 0.96666664}
-  m_Direction: 0
 --- !u!95 &1661982630
 Animator:
   serializedVersion: 3
