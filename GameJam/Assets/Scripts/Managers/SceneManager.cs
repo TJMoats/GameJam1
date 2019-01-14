@@ -1,18 +1,22 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+[RequireComponent(typeof(PolygonCollider2D))]
+public class SceneManager : SerializedMonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private PolygonCollider2D cameraBounds;
+    public PolygonCollider2D CameraBounds
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        get
+        {
+            if (cameraBounds == null)
+            {
+                GetComponent<PolygonCollider2D>();
+            }
+            return cameraBounds;
+        }
     }
 }

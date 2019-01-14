@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : SerializedMonoBehaviour
+public abstract class Trigger : SerializedMonoBehaviour
 {
-    private Collider2D collider2D;
+    private new Collider2D collider2D;
     protected Collider2D Collider2D
     {
         get
@@ -21,5 +21,20 @@ public class Trigger : SerializedMonoBehaviour
     private void Awake()
     {
         Collider2D.isTrigger = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D _collision)
+    {
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D _collision)
+    {
+        
+    }
+
+    private void OnTriggerStay2D(Collider2D _collision)
+    {
+        
     }
 }

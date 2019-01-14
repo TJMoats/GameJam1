@@ -11,7 +11,6 @@ public class SceneTransition : Trigger
         {
             
         }
-        
     }
 
     private void SwitchScene()
