@@ -17,4 +17,28 @@ public class SceneDictionary : MonoBehaviour
             return dictionary;
         }
     }
+
+    public enum SceneList
+    {
+        // Out of game
+        mainMenu,
+
+        // Indoors
+        playerHome,
+
+        // Outdoors
+        townMain,
+        townOutskirts_west,
+        townOutskirts_north,
+        townOutskirts_east,
+
+        woods_west,
+        hills,
+        castle_outside,
+
+        ratfolkDungeon_entrance,
+
+        // Dungeons
+        ratfolkDungeon
+    }
 }

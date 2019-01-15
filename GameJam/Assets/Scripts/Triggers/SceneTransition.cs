@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransition : Trigger
 {
     [SerializeField]
-    private Scene targetScene;
+    private SceneData targetScene;
 
     [SerializeField]
     private int transitionIndex;
@@ -15,12 +15,7 @@ public class SceneTransition : Trigger
     {
         if (_characterController == MasterManager.Instance.Player)
         {
-
+            WorldManager.ChangeScene(targetScene.name);
         }
-    }
-
-    private void SwitchScene()
-    {
-
     }
 }

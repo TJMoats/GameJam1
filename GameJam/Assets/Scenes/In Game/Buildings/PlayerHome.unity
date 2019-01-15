@@ -551,8 +551,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  targetScene:
-    m_Handle: 0
+  targetScene: {fileID: 0}
   transitionIndex: 0
 --- !u!1001 &827391071
 PrefabInstance:
@@ -2803,6 +2802,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  sceneData: {fileID: 11400000, guid: fd558475317c701488ca3ddc53c316bf, type: 2}
 --- !u!1 &1649400680
 GameObject:
   m_ObjectHideFlags: 0

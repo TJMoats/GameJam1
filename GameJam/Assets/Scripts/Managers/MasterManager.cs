@@ -48,15 +48,6 @@ public class MasterManager : SerializedMonoBehaviour
         }
     }
 
-    private SceneManager activeScene;
-    public SceneManager ActiveScene
-    {
-        get
-        {
-            return activeScene;
-        }
-    }
-
     private void Awake()
     {
         Instance = this;
