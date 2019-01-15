@@ -25,15 +25,42 @@ public abstract class Trigger : SerializedMonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        
+        CharacterController cc = _collision?.gameObject?.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            OnCharacterEnter(cc);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D _collision)
     {
-        
+        CharacterController cc = _collision?.gameObject?.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            OnCharacterExit(cc);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D _collision)
+    {
+        CharacterController cc = _collision?.gameObject?.GetComponent<CharacterController>();
+        if (cc != null)
+        {
+            OnCharacterStay(cc);
+        }
+    }
+
+    protected virtual void OnCharacterEnter(CharacterController _character)
+    {
+
+    }
+
+    protected virtual void OnCharacterExit(CharacterController _character)
+    {
+        
+    }
+
+    protected virtual void OnCharacterStay(CharacterController _character)
     {
         
     }

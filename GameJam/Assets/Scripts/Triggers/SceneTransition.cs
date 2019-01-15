@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : Trigger
 {
-    private void OnTriggerEnter2D(Collider2D _collision)
+    [SerializeField]
+    private Scene targetScene;
+
+    [SerializeField]
+    private int transitionIndex;
+
+    protected override void OnCharacterEnter(CharacterController _characterController)
     {
-        if (_collision.gameObject.tag == "Player")
+        if (_characterController == MasterManager.Instance.Player)
         {
-            
+
         }
     }
 
