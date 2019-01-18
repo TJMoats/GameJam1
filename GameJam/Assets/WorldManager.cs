@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,47 +7,80 @@ using UnityEngine.SceneManagement;
 
 public class WorldManager : MonoBehaviour
 {
-    [SerializeField]
-    private SceneDataDictionary scenes;
-    public SceneDataDictionary Scenes
+    private AsyncOperation loadingScene;
+
+    private static WorldManager instance;
+    public static WorldManager Instance
     {
         get
         {
-            if (scenes == null)
+            if (instance == null)
             {
-                throw new Exception("Scene Dictionary is missing!");
+                instance = FindObjectOfType<WorldManager>();
             }
-            return scenes;
+            return instance;
         }
     }
 
-    [SerializeField,]
-    private SceneData currentScene;
-    public SceneData CurrentScene
+    [SerializeField, ReadOnly]
+    private string currentScene;
+    public string CurrentScene
     {
         get => currentScene;
+        private set => currentScene = value;
     }
 
-    public static IEnumerator ChangeScene(string _newSceneName, string _oldSceneName = "", Action _postLoad = null)
+    public static void ChangeScene(string _newScene, string _transitionId)
     {
-        if (IsSceneNameValid(_newSceneName))
+        if (Instance.CurrentScene == _newScene)
         {
-            yield return SceneManager.LoadSceneAsync(_newSceneName, LoadSceneMode.Additive);
+            Debug.Log("Tried to load into the current scene!");
+            return;
+        }
+        
+        Instance.SwapActiveScene(Instance.CurrentScene, _newScene);
+    }
 
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(_newSceneName));
+    private void SwapActiveScene(string _currentScene, string _newScene)
+    {
+        Debug.Log($"Swapping from {_currentScene} to {_newScene}");
+        StartCoroutine(LoadScene(_newScene));
+    }
 
-            _postLoad();
+    private IEnumerator LoadScene(string _newScene)
+    {
+        AsyncOperation scene = SceneManager.LoadSceneAsync(_newScene, LoadSceneMode.Additive);
+        scene.allowSceneActivation = false;
+        loadingScene = scene;
 
-            if (IsSceneNameValid(_oldSceneName))
-            {
-                yield return new WaitForEndOfFrame();
-                SceneManager.UnloadSceneAsync(_oldSceneName);
-            }
+        while (scene.progress < 0.9f)
+        {
+            yield return null;
+        }
+        OnFinishedLoadingScene(_newScene);
+    }
+
+    void OnFinishedLoadingScene(string _newScene)
+    {
+        loadingScene.allowSceneActivation = true;
+
+        Scene sceneToLoad = SceneManager.GetSceneByName(_newScene);
+        if (sceneToLoad.IsValid())
+        {
+            SceneManager.MoveGameObjectToScene(MasterManager.Instance.PersistantGameContainer, sceneToLoad);
+            SceneManager.SetActiveScene(sceneToLoad);
+            AsyncOperation scene = SceneManager.UnloadSceneAsync(CurrentScene);
+            CurrentScene = _newScene;
         }
     }
 
-    private static bool IsSceneNameValid(string _sceneName )
+    private void Awake()
     {
-        throw new NotImplementedException();
+        instance = this;
+    }
+
+    private void Start()
+    {
+        CurrentScene = SceneManager.GetActiveScene().name;
     }
 }

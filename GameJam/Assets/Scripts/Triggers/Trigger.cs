@@ -3,8 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public abstract class Trigger : SerializedMonoBehaviour
 {
+    [SerializeField, ReadOnly]
+    private bool triggered;
+    public bool Triggered
+    {
+        get => triggered;
+        protected set => triggered = value;
+    }
+
     private new Collider2D collider2D;
     protected Collider2D Collider2D
     {
@@ -57,11 +66,11 @@ public abstract class Trigger : SerializedMonoBehaviour
 
     protected virtual void OnCharacterExit(CharacterController _character)
     {
-        
+
     }
 
     protected virtual void OnCharacterStay(CharacterController _character)
     {
-        
+
     }
 }

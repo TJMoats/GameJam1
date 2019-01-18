@@ -1,8 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MasterManager : SerializedMonoBehaviour
 {
@@ -45,6 +42,19 @@ public class MasterManager : SerializedMonoBehaviour
                 cameraManager = FindObjectOfType<CameraManager>();
             }
             return cameraManager;
+        }
+    }
+
+    private GameObject persistantGameContainer;
+    public GameObject PersistantGameContainer
+    {
+        get
+        {
+            if (persistantGameContainer == null)
+            {
+                persistantGameContainer = transform.root.gameObject;
+            }
+            return persistantGameContainer;
         }
     }
 
