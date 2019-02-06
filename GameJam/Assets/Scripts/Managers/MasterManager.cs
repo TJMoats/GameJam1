@@ -11,6 +11,11 @@ public class MasterManager : SerializedMonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<MasterManager>();
+                if (instance == null)
+                {
+                    Debug.Log("The master manager doesn't exist. Creating it now.");
+                    instance = LoadMasterManager();
+                }
             }
             return instance;
         }
@@ -56,6 +61,15 @@ public class MasterManager : SerializedMonoBehaviour
             }
             return persistantGameContainer;
         }
+    }
+
+    private static MasterManager LoadMasterManager()
+    {
+        GameObject masterManager = Instantiate(Resources.Load<GameObject>("Prefabs/Managers/MasterManager"));
+        masterManager.name = "Master Manager";
+        Debug.Log(masterManager, masterManager);
+        Debug.Log(masterManager.GetComponent<MasterManager>());
+        return masterManager.GetComponent<MasterManager>();
     }
 
     private void Awake()

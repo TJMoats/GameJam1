@@ -57,13 +57,16 @@ public class WorldManager : MonoBehaviour
         {
             yield return null;
         }
+        loadingScene.allowSceneActivation = true;
+        while (!loadingScene.isDone)
+        {
+            yield return null;
+        }
         OnFinishedLoadingScene(_newScene);
     }
 
     void OnFinishedLoadingScene(string _newScene)
     {
-        loadingScene.allowSceneActivation = true;
-
         Scene sceneToLoad = SceneManager.GetSceneByName(_newScene);
         if (sceneToLoad.IsValid())
         {

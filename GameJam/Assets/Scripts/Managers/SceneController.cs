@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +37,13 @@ public class SceneController : SerializedMonoBehaviour
     {
         SceneData.SceneName = SceneManager.GetActiveScene().name;
         SceneTransition[] availableTransitions = FindObjectsOfType<SceneTransition>();
+    }
 
+    private void Awake()
+    {
+        if (MasterManager.Instance == null)
+        {
+            throw new Exception("The master manager doesn't exist!");
+        }
     }
 }
