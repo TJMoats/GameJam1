@@ -2,7 +2,7 @@
 
 public class InteractableComponent : Entity
 {
-    public void ReceiveInteraction(InteractionComponent _target)
+    public virtual void ReceiveInteraction(InteractionComponent _source)
     {
         throw new System.NotImplementedException();
     }
