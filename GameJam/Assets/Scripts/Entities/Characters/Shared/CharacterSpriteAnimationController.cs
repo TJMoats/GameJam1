@@ -1,6 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSpriteAnimationController : SerializedMonoBehaviour
@@ -32,7 +30,17 @@ public class CharacterSpriteAnimationController : SerializedMonoBehaviour
     }
 
     [SerializeField]
-    Direction facing = Direction.down;
+    private Direction facing = Direction.down;
+    public Direction Facing
+    {
+        get => facing;
+    }
+
+    private Vector2 facingVector;
+    public Vector2 FacingVector
+    {
+        get => facingVector;
+    }
     private void SetDirection(Direction _direction)
     {
         facing = _direction;
@@ -41,18 +49,19 @@ public class CharacterSpriteAnimationController : SerializedMonoBehaviour
 
     private void SetDirection(Vector2 _direction)
     {
+        facingVector = _direction * -1;
         Direction newFacing;
-        if (Mathf.Abs(_direction.x) > Mathf.Abs(_direction.y))
+        if (Mathf.Abs(facingVector.x) > Mathf.Abs(facingVector.y))
         {
             // Left or right
-            newFacing = _direction.x > 0 ? Direction.left : Direction.right;
+            newFacing = facingVector.x < 0 ? Direction.left : Direction.right;
         }
         else
         {
             // Up or down
-            newFacing = _direction.y > 0 ? Direction.down : Direction.up;
+            newFacing = facingVector.y < 0 ? Direction.down : Direction.up;
         }
-            SetDirection(newFacing);
+        SetDirection(newFacing);
     }
 
     private void UpdateMovement()

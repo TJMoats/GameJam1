@@ -1,14 +1,34 @@
 ﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class InteractionComponent : SerializedMonoBehaviour
 {
+    [SerializeField]
+    private float interactionRange = 1f;
+
     public void InteractWith(InteractableComponent _target)
     {
-        throw new System.NotImplementedException();
+        _target.ReceiveInteraction(this);
     }
 
-    public InteractableComponent CheckForInteractable()
+    Vector2 direction;
+    public InteractableComponent CheckForInteractable(Vector2 _direction)
     {
-        throw new System.NotImplementedException();
+        direction = _direction;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _direction, interactionRange, LayerHelper.LayerUnion(LayerHelper.Interactable));
+        if (hit.collider)
+        {
+            InteractableComponent interactable = hit.collider?.gameObject?.GetComponent<InteractableComponent>();
+            if (interactable != null)
+            {
+                return interactable;
+            }
+        }
+        return null;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, direction);
     }
 }
