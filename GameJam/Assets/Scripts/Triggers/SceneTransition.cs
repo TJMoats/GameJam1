@@ -1,8 +1,11 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class SceneTransition : Trigger
 {
@@ -72,6 +75,7 @@ public class SceneTransition : Trigger
         }
     }
 
+#if UNITY_EDITOR
     private IList<ValueDropdownItem<string>> SceneList()
     {
         ValueDropdownList<string> valueDropdownItems = new ValueDropdownList<string>();
@@ -84,4 +88,5 @@ public class SceneTransition : Trigger
         }
         return valueDropdownItems;
     }
+#endif
 }
