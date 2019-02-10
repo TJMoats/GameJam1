@@ -88,7 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3130168408009831889}
-  - component: {fileID: 1324570286411400006}
+  - component: {fileID: 5691184782717546166}
+  - component: {fileID: 390128708396961096}
   m_Layer: 0
   m_Name: Kiln
   m_TagString: Untagged
@@ -112,8 +113,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1324570286411400006
-CircleCollider2D:
+--- !u!114 &5691184782717546166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509712552623947015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278d5824804d522469a72c445f858cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  canToggle: 1
+  toToggle: {fileID: 200979925124688177}
+--- !u!70 &390128708396961096
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,8 +150,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.88, y: 0.72}
+  m_Direction: 1
 --- !u!1 &4609065790459019030
 GameObject:
   m_ObjectHideFlags: 0
