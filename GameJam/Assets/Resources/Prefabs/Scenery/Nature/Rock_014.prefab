@@ -68,7 +68,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300164, guid: ee44722efb634344fa526a18aa58f240, type: 3}
+  m_Sprite: {fileID: 21300150, guid: 97b230d1c53f3b949bc8f517044b53e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,9 +88,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 893443677725129161}
-  - component: {fileID: 5842743250071496184}
+  - component: {fileID: 2375704232362359247}
   m_Layer: 0
-  m_Name: Rock_005
+  m_Name: Rock_014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &5842743250071496184
+--- !u!58 &2375704232362359247
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,9 +124,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.12}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.44
 --- !u!1 &8287312766585284089
 GameObject:
   m_ObjectHideFlags: 0
