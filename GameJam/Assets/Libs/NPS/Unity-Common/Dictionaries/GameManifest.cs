@@ -77,7 +77,6 @@ namespace NPS
                 dictionary.SaveDictionary(folderPath);
             }*/
         }
-#endif
 
         public BaseDictionary LoadDictionary(Type _dictionaryType)
         {
@@ -93,7 +92,7 @@ namespace NPS
             }
             return null;
         }
-
+#endif
         private T LoadDictionary<T>() where T : BaseDictionary
         {
             T[] resourceList = Resources.FindObjectsOfTypeAll<T>();

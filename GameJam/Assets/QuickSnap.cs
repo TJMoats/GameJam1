@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿#if UNITY_EDITOR
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -205,3 +206,4 @@ public class QuickSnap : SerializedMonoBehaviour
         GeneratePNG();
     }
 }
+#endif
