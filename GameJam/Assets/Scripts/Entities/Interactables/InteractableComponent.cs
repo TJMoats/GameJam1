@@ -2,7 +2,7 @@
 
 public class InteractableComponent : Entity
 {
-    private void Awake()
+    protected virtual void Awake()
     {
         LayerHelper.AssignLayer(gameObject, LayerHelper.Interactable, true);
     }

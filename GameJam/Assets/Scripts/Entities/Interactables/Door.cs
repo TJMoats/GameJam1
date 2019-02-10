@@ -3,42 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractableComponent
+public class Door : Toggle
 {
-    [SerializeField]
-    private bool canToggle = true;
-    private bool isOpen = false;
-
-    private GameObject closedStateContainer;
-    protected GameObject ClosedStateContainer
+    protected override GameObject ToToggle
     {
         get
         {
-            if (closedStateContainer == null)
+            if (toToggle == null)
             {
-                closedStateContainer = transform.Find("Sprites/Closed")?.gameObject;
+                toToggle = transform.Find("Sprites/Closed")?.gameObject;
             }
-            return closedStateContainer;
-        }
-    }
-
-    private void Start()
-    {
-        isOpen = ClosedStateContainer.activeSelf;
-    }
-
-    public override void ReceiveInteraction(InteractionComponent _target)
-    {
-        ToggleDoorState();
-    }
-
-    [Button]
-    public void ToggleDoorState()
-    {
-        if (canToggle)
-        {
-            isOpen = !isOpen;
-            ClosedStateContainer.SetActive(isOpen);
+            return toToggle;
         }
     }
 }
