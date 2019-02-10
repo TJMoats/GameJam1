@@ -2,7 +2,12 @@
 
 public class InteractableComponent : Entity
 {
-    public void ReceiveInteraction(InteractionComponent _target)
+    private void Awake()
+    {
+        LayerHelper.AssignLayer(gameObject, LayerHelper.Interactable, true);
+    }
+
+    public virtual void ReceiveInteraction(InteractionComponent _source)
     {
         throw new System.NotImplementedException();
     }

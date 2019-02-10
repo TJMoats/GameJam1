@@ -3,6 +3,34 @@ using UnityEngine;
 
 public class PlayerController : CharacterController
 {
+    #region Components
+    private InteractionComponent interactionComponent;
+    public InteractionComponent InteractionComponent
+    {
+        get
+        {
+            if (interactionComponent == null)
+            {
+                interactionComponent = gameObject.GetComponent<InteractionComponent>();
+            }
+            return interactionComponent;
+        }
+    }
+
+    private CharacterSpriteAnimationController animationController;
+    public CharacterSpriteAnimationController AnimationController
+    {
+        get
+        {
+            if (animationController == null)
+            {
+                animationController = GetComponentInChildren<CharacterSpriteAnimationController>();
+            }
+            return animationController;
+        }
+    }
+    #endregion
+
     [SerializeField]
     private InputMaster controls;
     [SerializeField]
@@ -27,6 +55,7 @@ public class PlayerController : CharacterController
         controls.Player.Attack.performed += ctx => AttackAction();
         controls.Player.Interact.performed += ctx => InteractAction();
         controls.Player.Movement.performed += ctx => MoveAction(ctx.ReadValue<Vector2>());
+        LayerHelper.AssignLayer(gameObject, LayerHelper.Player);
     }
 
     private void FixedUpdate()
@@ -41,7 +70,12 @@ public class PlayerController : CharacterController
 
     private void InteractAction()
     {
-        Debug.Log("Interact!");
+        InteractableComponent interactableComponent = InteractionComponent.CheckForInteractable(AnimationController.FacingVector);
+        if (interactableComponent != null)
+        {
+            Debug.Log($"Interacting with {interactableComponent.name}", interactableComponent.gameObject);
+            interactableComponent.ReceiveInteraction(InteractionComponent);
+        }
     }
 
     private void MoveAction(Vector2 _direction)
