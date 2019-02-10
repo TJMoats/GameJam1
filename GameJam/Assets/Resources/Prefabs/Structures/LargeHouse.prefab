@@ -108,17 +108,20 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1178110042850145972, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
     - target: {fileID: 6020055511268652754, guid: bc8f6e76f36e3f84da366ffe972184b5,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6020055511268652754, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
     - target: {fileID: 8058994308289456136, guid: bc8f6e76f36e3f84da366ffe972184b5,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8058994308289456136, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc8f6e76f36e3f84da366ffe972184b5, type: 3}
 --- !u!4 &8592343404633945196 stripped
@@ -213,7 +216,8 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1574767249842494831, guid: 355eb6800d807224fb18a085ad026f99,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 355eb6800d807224fb18a085ad026f99, type: 3}
 --- !u!4 &5067114935259632289 stripped

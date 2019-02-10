@@ -101,6 +101,7 @@ namespace NPS
         }*/
 
         #region IO
+#if UNITY_EDITOR
         public static Texture2D SaveTexture(Texture2D _tex, string _path)
         {
             byte[] bytes = _tex.EncodeToPNG();
@@ -129,6 +130,7 @@ namespace NPS
             AssetDatabase.ImportAsset(_path, ImportAssetOptions.ForceUpdate);
             return AssetDatabase.LoadAssetAtPath<Texture2D>(_path);
         }
+#endif
         #endregion
     }
 

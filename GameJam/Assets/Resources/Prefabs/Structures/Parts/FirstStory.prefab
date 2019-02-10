@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -6379,11 +6379,12 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 153000476871451934, guid: 55f1f531e7f52b04196ae965d94749e1,
+        type: 3}
     - target: {fileID: 153000476871451934, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2432401591619856399, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
@@ -6444,11 +6445,12 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9048190594689055650, guid: 55f1f531e7f52b04196ae965d94749e1,
+        type: 3}
     - target: {fileID: 9048190594689055650, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1465770682887483479, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
