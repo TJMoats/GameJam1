@@ -122,6 +122,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8058994308289456136, guid: bc8f6e76f36e3f84da366ffe972184b5,
         type: 3}
+    - target: {fileID: 1317001384570412115, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1317001384570412115, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
+    - target: {fileID: 1317001384570412140, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1317001384570412140, guid: bc8f6e76f36e3f84da366ffe972184b5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc8f6e76f36e3f84da366ffe972184b5, type: 3}
 --- !u!4 &8592343404633945196 stripped
