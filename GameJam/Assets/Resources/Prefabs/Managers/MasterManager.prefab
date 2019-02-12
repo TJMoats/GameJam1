@@ -730,6 +730,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3840522753330019242, guid: 0958c15df8e9e304ca8ad8237e56b315,
         type: 3}
+    - target: {fileID: 3840522753330019242, guid: 0958c15df8e9e304ca8ad8237e56b315,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1661982631, guid: 0958c15df8e9e304ca8ad8237e56b315, type: 3}
       propertyPath: serializationData.Prefab
       value: 
