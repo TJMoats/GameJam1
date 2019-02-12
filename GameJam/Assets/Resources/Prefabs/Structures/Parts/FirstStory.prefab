@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -2918,7 +2918,7 @@ Transform:
   m_Children:
   - {fileID: 7179311675884891024}
   - {fileID: 6020055511268652749}
-  - {fileID: 1317001384570411737}
+  - {fileID: 3713021716438252453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6379,11 +6379,12 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 153000476871451934, guid: 55f1f531e7f52b04196ae965d94749e1,
+        type: 3}
     - target: {fileID: 153000476871451934, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2432401591619856399, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
@@ -6444,11 +6445,12 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9048190594689055650, guid: 55f1f531e7f52b04196ae965d94749e1,
+        type: 3}
     - target: {fileID: 9048190594689055650, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
       propertyPath: serializationData.SerializedFormat
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1465770682887483479, guid: 55f1f531e7f52b04196ae965d94749e1,
         type: 3}
@@ -6462,7 +6464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55f1f531e7f52b04196ae965d94749e1, type: 3}
---- !u!4 &1317001384570411737 stripped
+--- !u!4 &3713021716438252453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2432401591619856399, guid: 55f1f531e7f52b04196ae965d94749e1,
     type: 3}
