@@ -1,8 +1,7 @@
 ﻿using Cinemachine;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraManager : MonoBehaviour
 {
@@ -48,5 +47,11 @@ public class CameraManager : MonoBehaviour
             }
             return cinemachineConfiner;
         }
+    }
+
+    void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
+    {
+        Debug.Log("OnSceneLoaded: " + _scene.name);
+        Debug.Log(_mode);
     }
 }

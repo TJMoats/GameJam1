@@ -9,27 +9,36 @@ EditorBuildSettings:
     path: Assets/Scenes/In Game/Buildings/PlayerHome.unity
     guid: c03a5045208f91348bb562ae0ef1c301
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/01-00 Town_Main.unity
+    path: Assets/Scenes/In Game/Overworld/Town.unity
     guid: de8999a107c6e0944990003180b47373
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/02-00 TownOutskirts_North.unity
+    path: Assets/Scenes/In Game/Overworld/Old/02-00 TownOutskirts_North.unity
     guid: b3c8da19674234747b49b6dddbf9b78a
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/03-00 TownOutskirts_East.unity
+    path: Assets/Scenes/In Game/Overworld/Old/03-00 TownOutskirts_East.unity
     guid: b394dc7823a345f4588e76b5e6e06665
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/04-00 Woods_West.unity
+    path: Assets/Scenes/In Game/Overworld/Old/04-00 Woods_West.unity
     guid: 27790bb04fb375142bea7b972e384d5f
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/Game Jam Castle Stuff.unity
+    path: Assets/Scenes/In Game/Overworld/Old/Game Jam Castle Stuff.unity
     guid: ff203892d357aa34a98f4691fc906bb5
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/Game Jam Forest.unity
+    path: Assets/Scenes/In Game/Overworld/Old/Game Jam Forest.unity
     guid: e6ed60eeac63ca440b101d207978fec9
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/Game Jam Hill Area.unity
+    path: Assets/Scenes/In Game/Overworld/Old/Game Jam Hill Area.unity
     guid: 85a3d6cb563e3a848aa60da66ea163f6
   - enabled: 1
-    path: Assets/Scenes/In Game/Overworld/Pre Dungeon Area.unity
+    path: Assets/Scenes/In Game/Overworld/Old/Pre Dungeon Area.unity
     guid: 77c6e750dc50e384d8c9da4601a629aa
+  - enabled: 1
+    path: Assets/Scenes/In Game/Overworld/Town North Road.unity
+    guid: 6c6103f38c72aea4695e6a0fba43da65
+  - enabled: 1
+    path: Assets/Scenes/In Game/Overworld/Town East Road.unity
+    guid: b5fc0164d66d74d4a96ee3ddbf6d49ed
+  - enabled: 1
+    path: Assets/Scenes/In Game/Overworld/Town West Road.unity
+    guid: d6888afd54d74674abc229a24a237586
   m_configObjects: {}

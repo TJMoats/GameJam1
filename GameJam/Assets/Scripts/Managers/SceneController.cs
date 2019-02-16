@@ -7,19 +7,6 @@ using UnityEngine.SceneManagement;
 public class SceneController : SerializedMonoBehaviour
 {
     [SerializeField]
-    private SceneData sceneData;
-    public SceneData SceneData
-    {
-        get
-        {
-            if (sceneData == null)
-            {
-                throw new System.Exception("This scene is missing it's data!");
-            }
-            return sceneData;
-        }
-    }
-
     private PolygonCollider2D cameraBounds;
     public PolygonCollider2D CameraBounds
     {
@@ -35,8 +22,7 @@ public class SceneController : SerializedMonoBehaviour
 
     private void OnValidate()
     {
-        SceneData.SceneName = SceneManager.GetActiveScene().name;
-        SceneTransition[] availableTransitions = FindObjectsOfType<SceneTransition>();
+
     }
 
     private void Awake()
