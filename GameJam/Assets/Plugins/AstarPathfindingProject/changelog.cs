@@ -2,6 +2,20 @@
 /// \page changelog Changelog
 /// \order{-10}
 ///
+/// - 4.2.5 (2019-02-14)
+/// 	- Added a new documentation page for how to create and configure graphs during runtime. runtime-graphs (view in online documentation for working links).
+/// 	- Added a new documentation page about editing point graph connections manually. editing-graphs (view in online documentation for working links).
+/// 	- Fixed exceptions could be thrown if the project contains some assemblies that can for some reason not be read.
+/// 	- Fixed the visualization for unwalkable nodes (red cubes) sometimes disappearing in newer versions of Unity (2018.2+ I think) due to a change in how Time.renderedFrameCount works.
+/// 		Thanks Kevin Jenkins for reporting this.
+/// 	- Fixed applying optimizations (under the Optimizations tab) could cause several error messages to be logged about unsupported platforms in Unity 2018.3 or newer. Thanks NoxMortem for reporting the issue.
+/// 	- Fixed AIPath throwing an exception if it was given a valid path that contained no nodes at all.
+/// 	- Made Path.GetTagPenalty public instead of internal.
+/// 	- Added <see cref="Pathfinding.ABPath.FakePath"/>.
+/// 	- Worked around a null reference exception bug when using IL2CPP and deploying for iPhone.
+/// 		This is caused by a bug in the IL2CPP compiler.
+/// 	- Fixed custom graph types could not be used if they were in another assembly. Thanks juskelis for reporting this and founderio for finding a fix.
+///
 /// - 4.2.4 (2018-12-03)
 /// 	- Added an option for which dimension of the hexagon to adjust in the grid graph editor when using the hexagonal mode.
 /// 		This significantly helps with making a hexagonal graph line up with your other game elements as previously you might have had to manually calculate some complicated conversion factors in order to do this.

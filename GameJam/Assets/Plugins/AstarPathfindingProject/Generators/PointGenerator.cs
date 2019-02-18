@@ -190,6 +190,8 @@ namespace Pathfinding {
 		///     node2.AddConnection(node1, cost);
 		/// }));
 		/// </code>
+		///
+		/// See: runtime-graphs (view in online documentation for working links)
 		/// </summary>
 		public PointNode AddNode (Int3 position) {
 			return AddNode(new PointNode(active), position);
@@ -205,7 +207,8 @@ namespace Pathfinding {
 		/// - during a graph update
 		/// - inside a callback registered using AstarPath.AddWorkItem
 		///
-		/// See: AstarPath.AddWorkItem
+		/// See: <see cref="AstarPath.AddWorkItem"/>
+		/// See: runtime-graphs (view in online documentation for working links)
 		/// </summary>
 		/// <param name="node">This must be a node created using T(AstarPath.active) right before the call to this method.
 		/// The node parameter is only there because there is no new(AstarPath) constraint on
