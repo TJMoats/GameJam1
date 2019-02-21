@@ -1,49 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using NPS;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class FadeOutTransition : SceneTransition
 {
     [SerializeField]
-    private string targetTransitionId;
-
-    [SerializeField]
-    private string transitionId = System.Guid.NewGuid().ToString();
-    public string TransitionId
+    private SpawnPoint targetSpawnPoint;
+    private Vector2 SpawnPosition
     {
-        get
-        {
-            if (string.IsNullOrEmpty(TransitionId))
-            {
-                transitionId = System.Guid.NewGuid().ToString();
-            }
-            return transitionId;
-        }
+        get => SpawnPoint.GetSpawnPosition(spawnPointGuid);
     }
 
     [SerializeField]
-    private Transform spawnPoint;
-    public Transform SpawnPoint
-    {
-        get
-        {
-            if (spawnPoint == null)
-            {
-                Transform sp = transform.Find("SpawnPoint");
-                if (sp == null)
-                {
-                    GameObject spgo = new GameObject("SpawnPoint");
-                    spgo.transform.SetParent(transform);
-                    spgo.transform.localPosition = Vector3.zero;
-                    sp = spgo.transform;
-                }
-                spawnPoint = sp;
-            }
-            return spawnPoint;
-        }
-        private set => spawnPoint = value;
-    }
-
+    private string spawnPointGuid = "";
+    
     public override TransitionType TransitionType
     {
         get => TransitionType.fade;
@@ -54,21 +24,31 @@ public class FadeOutTransition : SceneTransition
         if (!Triggered && _characterController == MasterManager.Instance.Player)
         {
             Triggered = true;
-            // WorldManager.Instance.MakeSceneActive(TargetSceneName);
+            FadeEffect.Instance.FadeOut(FadeFinished);
+        }
+    }
+
+    private void FadeFinished()
+    {
+        SceneHelper.MakeAllScenesInactive();
+        SceneHelper.MakeSceneActive(TargetSceneName);
+        SceneHelper.PrimarySceneName = TargetSceneName;
+        PlayerController.Instance.gameObject.transform.position = SpawnPosition;
+        FadeEffect.Instance.FadeIn(null);
+        Triggered = false;
+    }
+
+    [Button]
+    public void GrabGuid()
+    {
+        if (spawnPointGuid == "" && targetSpawnPoint != null)
+        {
+            spawnPointGuid = targetSpawnPoint.GUID;
         }
     }
 
     private void OnValidate()
     {
-        SpawnPoint = SpawnPoint;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (SpawnPoint != null)
-        {
-            Gizmos.color = new Color(0, .2f, .8f, .5f);
-            Gizmos.DrawSphere(SpawnPoint.position, .5f);
-        }
+        GrabGuid();
     }
 }

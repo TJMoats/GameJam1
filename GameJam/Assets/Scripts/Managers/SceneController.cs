@@ -38,6 +38,7 @@ public class SceneController : NPS.SceneController
                 SceneHelper.SetActive(sceneName, true);
             });
 
+            Debug.Log("Hit");
             List<string> transitionalScenes = GetTransitionalScenes();
             transitionalScenes.ForEach((string sceneName) =>
             {

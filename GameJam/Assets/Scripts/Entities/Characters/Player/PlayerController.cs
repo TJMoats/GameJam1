@@ -6,6 +6,19 @@ using static UnityEngine.Experimental.Input.InputAction;
 
 public class PlayerController : CharacterController
 {
+    private static PlayerController instance;
+    public static PlayerController Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<PlayerController>();
+            }
+            return instance;
+        }
+    }
+
     #region Components
     private InteractionComponent interactionComponent;
     public InteractionComponent InteractionComponent
@@ -69,6 +82,11 @@ public class PlayerController : CharacterController
         controls.Player.Movement.performed += ctx => MoveAction(ctx.ReadValue<Vector2>());
         controls.Player.Movement.cancelled += ctx => MoveAction(ctx.ReadValue<Vector2>());
         LayerHelper.AssignLayer(gameObject, LayerHelper.Player);
+    }
+
+    private void Start()
+    {
+
     }
 
     private void FixedUpdate()

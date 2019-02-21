@@ -1,10 +1,11 @@
-﻿using Sirenix.OdinInspector;
+﻿using NPS;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class MasterManager : SerializedMonoBehaviour
+public class MasterManager : NPS.MasterManager
 {
     private static MasterManager instance;
-    public static MasterManager Instance
+    public static new MasterManager Instance
     {
         get
         {
@@ -67,8 +68,7 @@ public class MasterManager : SerializedMonoBehaviour
     {
         GameObject masterManager = Instantiate(Resources.Load<GameObject>("Prefabs/Managers/MasterManager"));
         masterManager.name = "Master Manager";
-        Debug.Log(masterManager, masterManager);
-        Debug.Log(masterManager.GetComponent<MasterManager>());
+        PlayerController.Instance.gameObject.transform.position = SpawnPoint.GetSpawnPosition("");
         return masterManager.GetComponent<MasterManager>();
     }
 

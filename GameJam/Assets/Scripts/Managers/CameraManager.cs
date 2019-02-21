@@ -52,6 +52,7 @@ public class CameraManager : SerializedMonoBehaviour
 
     private void Awake()
     {
+        ChangeBounds();
         NPS.SceneHelper.primarySceneChanged += ChangeBounds;
         CinemachineConfiner.m_BoundingShape2D = CameraBounds;
         StartCoroutine(DelayDampening());
@@ -63,10 +64,17 @@ public class CameraManager : SerializedMonoBehaviour
         CinemachineConfiner.m_Damping = 1;
     }
 
-    private void ChangeBounds(NPS.SceneLoader _sceneLoader)
+    private void ChangeBounds(NPS.SceneLoader _sceneLoader = null)
     {
-        SceneController sceneController = _sceneLoader.sceneController as SceneController;
-        CloneBounds(sceneController.SceneBounds);
+        if (_sceneLoader == null)
+        {
+            CloneBounds(FindObjectOfType<SceneController>().SceneBounds);
+        }
+        else
+        {
+            SceneController sceneController = _sceneLoader.sceneController as SceneController;
+            CloneBounds(sceneController.SceneBounds);
+        }
     }
 
     private PolygonCollider2D cameraBounds;
@@ -92,7 +100,7 @@ public class CameraManager : SerializedMonoBehaviour
             newBounds[i].x += (_sceneBounds.points[i].x > 0 ? 1 : -1);
             newBounds[i].y += (_sceneBounds.points[i].y > 0 ? 1 : -1);
         }
-        cameraBounds.points = newBounds;
+        CameraBounds.points = newBounds;
         CinemachineConfiner.InvalidatePathCache();
     }
 }

@@ -122,6 +122,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  _gameManifest: {fileID: 0}
+  _mainCamera: {fileID: 0}
   player: {fileID: 0}
   cameraManager: {fileID: 0}
 --- !u!1 &1451952833323153119
@@ -138,7 +140,7 @@ GameObject:
   - component: {fileID: 5762219280899381340}
   - component: {fileID: 5192655184347396939}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,6 +239,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb223773dae8014b86f561a0a05d6b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &2459505626221862921
 GameObject:
   m_ObjectHideFlags: 0
