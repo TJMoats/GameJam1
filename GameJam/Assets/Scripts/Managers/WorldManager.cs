@@ -18,8 +18,6 @@ public class WorldManager : SerializedMonoBehaviour
     }
     #endregion  
 
-
-    
     private void Awake()
     {
         instance = this;

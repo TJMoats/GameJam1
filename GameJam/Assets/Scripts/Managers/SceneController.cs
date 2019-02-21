@@ -8,16 +8,16 @@ using UnityEngine.SceneManagement;
 public class SceneController : NPS.SceneController
 {
     [SerializeField]
-    private PolygonCollider2D cameraBounds;
-    public PolygonCollider2D CameraBounds
+    private PolygonCollider2D sceneBounds;
+    public PolygonCollider2D SceneBounds
     {
         get
         {
-            if (cameraBounds == null)
+            if (sceneBounds == null)
             {
-                GetComponent<PolygonCollider2D>();
+                sceneBounds = GetComponent<PolygonCollider2D>();
             }
-            return cameraBounds;
+            return sceneBounds;
         }
     }
 
@@ -28,20 +28,27 @@ public class SceneController : NPS.SceneController
         {
             throw new Exception("The master manager doesn't exist!");
         }
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+        SceneHelper.RegisterScene(SceneName, this);
+        if (SceneManager.GetActiveScene().name == SceneName)
+        {
+            List<string> adjacentScenes = GetAdjacentScenes();
+            adjacentScenes.ForEach((string sceneName) =>
+            {
+                StartCoroutine(SceneHelper.PreloadScene(sceneName));
+                SceneHelper.SetActive(sceneName, true);
+            });
+        }
     }
 
-    private void SceneManager_activeSceneChanged(Scene _scene1, Scene _scene2)
+    private void OnTriggerEnter2D(Collider2D _collision)
     {
-        Debug.Log($"{_scene1.name} {_scene2.name}", gameObject);
+        PlayerController player = _collision.gameObject?.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            SceneHelper.PrimarySceneName = SceneName;
+        }
     }
-
-    private void SceneManager_sceneLoaded(Scene _scene, LoadSceneMode _loadSceneMode)
-    {
-        Debug.Log($"Scene Loaded: {_scene.name}.", gameObject);
-    }
-
+    
     private List<string> GetAdjacentScenes()
     {
         List<string> sceneList = new List<string>();
@@ -51,5 +58,10 @@ public class SceneController : NPS.SceneController
             sceneList.Add(s.TargetSceneName);
         }
         return sceneList;
+    }
+
+    private void SetPrimary()
+    {
+
     }
 }

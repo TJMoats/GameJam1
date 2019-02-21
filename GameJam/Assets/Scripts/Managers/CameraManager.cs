@@ -1,9 +1,9 @@
 ﻿using Cinemachine;
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : SerializedMonoBehaviour
 {
     [SerializeField, ReadOnly, PreviewField]
     private Camera mainCamera;
@@ -32,6 +32,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
     private CinemachineConfiner cinemachineConfiner;
     public CinemachineConfiner CinemachineConfiner
     {
@@ -49,9 +50,49 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene _scene, LoadSceneMode _mode)
+    private void Awake()
     {
-        Debug.Log("OnSceneLoaded: " + _scene.name);
-        Debug.Log(_mode);
+        NPS.SceneHelper.primarySceneChanged += ChangeBounds;
+        CinemachineConfiner.m_BoundingShape2D = CameraBounds;
+        StartCoroutine(DelayDampening());
+    }
+
+    private IEnumerator DelayDampening()
+    {
+        yield return new WaitForSeconds(.1f);
+        CinemachineConfiner.m_Damping = 1;
+    }
+
+    private void ChangeBounds(NPS.SceneLoader _sceneLoader)
+    {
+        SceneController sceneController = _sceneLoader.sceneController as SceneController;
+        CloneBounds(sceneController.SceneBounds);
+    }
+
+    private PolygonCollider2D cameraBounds;
+    public PolygonCollider2D CameraBounds
+    {
+        get
+        {
+            if (cameraBounds == null)
+            {
+                cameraBounds = gameObject.GetOrAddComponent<PolygonCollider2D>();
+                cameraBounds.isTrigger = true;
+            }
+            return cameraBounds;
+        }
+    }
+
+    private void CloneBounds(PolygonCollider2D _sceneBounds)
+    {
+        Vector2[] newBounds = new Vector2[_sceneBounds.points.Length];
+        for (int i = 0; i < newBounds.Length; i++)
+        {
+            newBounds[i] = _sceneBounds.points[i] + ((Vector2)_sceneBounds.gameObject.transform.position);
+            newBounds[i].x += (_sceneBounds.points[i].x > 0 ? 1 : -1);
+            newBounds[i].y += (_sceneBounds.points[i].y > 0 ? 1 : -1);
+        }
+        cameraBounds.points = newBounds;
+        CinemachineConfiner.InvalidatePathCache();
     }
 }
