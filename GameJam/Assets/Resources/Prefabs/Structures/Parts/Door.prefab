@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6139216151054585347}
   - component: {fileID: 6797025260584113681}
-  - component: {fileID: 9048190594689055650}
+  - component: {fileID: 7681197841893816964}
   m_Layer: 0
   m_Name: SceneTransition
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465770682887483479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.06, z: 0}
+  m_LocalPosition: {x: 0, y: -1.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2456137038028990932}
@@ -131,7 +131,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &9048190594689055650
+--- !u!114 &7681197841893816964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1465770682887483479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb91ec33525393d4783ecc3938f7ad4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6163a0db58422eb4b9a627c32ff1d699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -155,7 +155,7 @@ MonoBehaviour:
   triggered: 0
   targetSceneName: 
   targetTransitionId: 
-  transitionId: 9bc88124-edee-4b1e-8fdd-416ca0717463
+  transitionId: 1084b623-0f97-4d92-96c4-fdc402e185e4
   spawnPoint: {fileID: 2456137038028990932}
 --- !u!1 &1623550821713023561
 GameObject:

@@ -1,6 +1,7 @@
 ﻿using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Experimental.Input;
 using static UnityEngine.Experimental.Input.InputAction;
 
 public class PlayerController : CharacterController
@@ -41,6 +42,15 @@ public class PlayerController : CharacterController
     private float accelerationSpeed = 3;
     [SerializeField]
     private float movementSpeed = 10;
+    public float MovementSpeed
+    {
+        get => movementSpeed * (Sprinting ? 1.5f : 1f);
+    }
+
+    public bool Sprinting
+    {
+        get => InputSystem.GetDevice<Keyboard>().leftShiftKey.isPressed;
+    }
 
     public override bool Moving
     {
@@ -57,20 +67,13 @@ public class PlayerController : CharacterController
         controls.Player.Attack.performed += ctx => AttackAction();
         controls.Player.Interact.performed += ctx => InteractAction();
         controls.Player.Movement.performed += ctx => MoveAction(ctx.ReadValue<Vector2>());
-        controls.Player.Sprint.performed += ctx => SprintAction(ctx);
+        controls.Player.Movement.cancelled += ctx => MoveAction(ctx.ReadValue<Vector2>());
         LayerHelper.AssignLayer(gameObject, LayerHelper.Player);
-    }
-
-    private void SprintAction(CallbackContext _ctx)
-    {
-        bool temp = _ctx.ReadValue<bool>();
-        Debug.Log(temp);
-        Debug.Log("Sprinting!");
     }
 
     private void FixedUpdate()
     {
-        Rigidbody.velocity = movementDirection * movementSpeed;
+        Rigidbody.velocity = movementDirection * MovementSpeed;
     }
 
     private void AttackAction()

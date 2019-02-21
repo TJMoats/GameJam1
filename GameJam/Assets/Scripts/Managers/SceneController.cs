@@ -37,6 +37,13 @@ public class SceneController : NPS.SceneController
                 StartCoroutine(SceneHelper.PreloadScene(sceneName));
                 SceneHelper.SetActive(sceneName, true);
             });
+
+            List<string> transitionalScenes = GetTransitionalScenes();
+            transitionalScenes.ForEach((string sceneName) =>
+            {
+                StartCoroutine(SceneHelper.PreloadScene(sceneName));
+                SceneHelper.SetActive(sceneName, false);
+            });
         }
     }
 
@@ -52,9 +59,21 @@ public class SceneController : NPS.SceneController
     private List<string> GetAdjacentScenes()
     {
         List<string> sceneList = new List<string>();
-        SceneTransition[] sceneTransitions = FindObjectsOfType<SceneTransition>();
+        SceneTransition[] sceneTransitions = FindObjectsOfType<SceneScrollTransition>();
         foreach (SceneTransition s in sceneTransitions)
         {
+            sceneList.Add(s.TargetSceneName);
+        }
+        return sceneList;
+    }
+
+    private List<string> GetTransitionalScenes()
+    {
+        List<string> sceneList = new List<string>();
+        FadeOutTransition[] sceneTransitions = FindObjectsOfType<FadeOutTransition>();
+        foreach (FadeOutTransition s in sceneTransitions)
+        {
+            Debug.Log(s.TargetSceneName);
             sceneList.Add(s.TargetSceneName);
         }
         return sceneList;

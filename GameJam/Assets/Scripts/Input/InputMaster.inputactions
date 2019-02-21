@@ -9,24 +9,40 @@
                     "name": "Attack",
                     "id": "39549794-247d-44ee-b6ff-b6e9da60940f",
                     "expectedControlLayout": "",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "",
+                    "interactions": "",
                     "bindings": []
                 },
                 {
                     "name": "Movement",
                     "id": "f59086c8-348e-4e01-a6cd-047849b206ee",
                     "expectedControlLayout": "Axis",
+                    "continuous": true,
+                    "passThrough": false,
+                    "processors": "",
+                    "interactions": "",
                     "bindings": []
                 },
                 {
                     "name": "Interact",
                     "id": "ff810402-a9dc-4d11-9fc2-0c58cc33a770",
                     "expectedControlLayout": "",
+                    "continuous": false,
+                    "passThrough": false,
+                    "processors": "",
+                    "interactions": "",
                     "bindings": []
                 },
                 {
                     "name": "Sprint",
                     "id": "6a1a3728-5ddf-4032-b4fe-65679324e70f",
-                    "expectedControlLayout": "",
+                    "expectedControlLayout": "Key",
+                    "continuous": true,
+                    "passThrough": false,
+                    "processors": "",
+                    "interactions": "",
                     "bindings": []
                 }
             ],
@@ -34,18 +50,6 @@
                 {
                     "name": "",
                     "path": "<Keyboard>/space",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": ";Keyboard & Mouse",
-                    "action": "Attack",
-                    "chainWithPrevious": false,
-                    "isComposite": false,
-                    "isPartOfComposite": false,
-                    "modifiers": ""
-                },
-                {
-                    "name": "Dpad",
-                    "path": "<Mouse>/leftButton",
                     "interactions": "Press",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
@@ -70,7 +74,7 @@
                 {
                     "name": "Wasd",
                     "path": "Dpad",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Movement",
@@ -82,7 +86,7 @@
                 {
                     "name": "up",
                     "path": "<Keyboard>/w",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Movement",
@@ -94,7 +98,7 @@
                 {
                     "name": "down",
                     "path": "<Keyboard>/s",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Movement",
@@ -106,7 +110,7 @@
                 {
                     "name": "left",
                     "path": "<Keyboard>/a",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Movement",
@@ -118,69 +122,9 @@
                 {
                     "name": "right",
                     "path": "<Keyboard>/d",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "Movement",
-                    "chainWithPrevious": false,
-                    "isComposite": false,
-                    "isPartOfComposite": true,
-                    "modifiers": ""
-                },
-                {
-                    "name": "ArrowKeys",
-                    "path": "Dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "chainWithPrevious": false,
-                    "isComposite": true,
-                    "isPartOfComposite": false,
-                    "modifiers": ""
-                },
-                {
-                    "name": "up",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Movement",
-                    "chainWithPrevious": false,
-                    "isComposite": false,
-                    "isPartOfComposite": true,
-                    "modifiers": ""
-                },
-                {
-                    "name": "down",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Movement",
-                    "chainWithPrevious": false,
-                    "isComposite": false,
-                    "isPartOfComposite": true,
-                    "modifiers": ""
-                },
-                {
-                    "name": "left",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Movement",
-                    "chainWithPrevious": false,
-                    "isComposite": false,
-                    "isPartOfComposite": true,
-                    "modifiers": ""
-                },
-                {
-                    "name": "right",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
                     "action": "Movement",
                     "chainWithPrevious": false,
                     "isComposite": false,
@@ -274,7 +218,7 @@
                 {
                     "name": "right",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Press,PressAndRelease",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "Sprint",
