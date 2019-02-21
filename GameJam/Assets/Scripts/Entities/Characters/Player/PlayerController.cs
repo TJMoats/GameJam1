@@ -1,5 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using static UnityEngine.Experimental.Input.InputAction;
 
 public class PlayerController : CharacterController
 {
@@ -55,7 +57,15 @@ public class PlayerController : CharacterController
         controls.Player.Attack.performed += ctx => AttackAction();
         controls.Player.Interact.performed += ctx => InteractAction();
         controls.Player.Movement.performed += ctx => MoveAction(ctx.ReadValue<Vector2>());
+        controls.Player.Sprint.performed += ctx => SprintAction(ctx);
         LayerHelper.AssignLayer(gameObject, LayerHelper.Player);
+    }
+
+    private void SprintAction(CallbackContext _ctx)
+    {
+        bool temp = _ctx.ReadValue<bool>();
+        Debug.Log(temp);
+        Debug.Log("Sprinting!");
     }
 
     private void FixedUpdate()

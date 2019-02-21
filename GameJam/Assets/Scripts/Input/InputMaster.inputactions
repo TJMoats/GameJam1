@@ -22,6 +22,12 @@
                     "id": "ff810402-a9dc-4d11-9fc2-0c58cc33a770",
                     "expectedControlLayout": "",
                     "bindings": []
+                },
+                {
+                    "name": "Sprint",
+                    "id": "6a1a3728-5ddf-4032-b4fe-65679324e70f",
+                    "expectedControlLayout": "",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -260,6 +266,18 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Interact",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "right",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press,PressAndRelease",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "Sprint",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,
