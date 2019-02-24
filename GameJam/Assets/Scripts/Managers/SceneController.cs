@@ -29,23 +29,6 @@ public class SceneController : NPS.SceneController
             throw new Exception("The master manager doesn't exist!");
         }
         SceneHelper.RegisterScene(SceneName, this);
-        if (SceneManager.GetActiveScene().name == SceneName)
-        {
-            List<string> adjacentScenes = GetAdjacentScenes();
-            adjacentScenes.ForEach((string sceneName) =>
-            {
-                StartCoroutine(SceneHelper.PreloadScene(sceneName));
-                SceneHelper.SetActive(sceneName, true);
-            });
-
-            Debug.Log("Hit");
-            List<string> transitionalScenes = GetTransitionalScenes();
-            transitionalScenes.ForEach((string sceneName) =>
-            {
-                StartCoroutine(SceneHelper.PreloadScene(sceneName));
-                SceneHelper.SetActive(sceneName, false);
-            });
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)
@@ -56,11 +39,11 @@ public class SceneController : NPS.SceneController
             SceneHelper.PrimarySceneName = SceneName;
         }
     }
-    
-    private List<string> GetAdjacentScenes()
+
+    public List<string> GetAdjacentScenes()
     {
         List<string> sceneList = new List<string>();
-        SceneTransition[] sceneTransitions = FindObjectsOfType<SceneScrollTransition>();
+        SceneTransition[] sceneTransitions = GetComponentsInChildren<SceneScrollTransition>();
         foreach (SceneTransition s in sceneTransitions)
         {
             sceneList.Add(s.TargetSceneName);
@@ -68,20 +51,14 @@ public class SceneController : NPS.SceneController
         return sceneList;
     }
 
-    private List<string> GetTransitionalScenes()
+    public List<string> GetTransitionalScenes()
     {
         List<string> sceneList = new List<string>();
-        FadeOutTransition[] sceneTransitions = FindObjectsOfType<FadeOutTransition>();
+        FadeOutTransition[] sceneTransitions = GetComponentsInChildren<FadeOutTransition>();
         foreach (FadeOutTransition s in sceneTransitions)
         {
-            Debug.Log(s.TargetSceneName);
             sceneList.Add(s.TargetSceneName);
         }
         return sceneList;
-    }
-
-    private void SetPrimary()
-    {
-
     }
 }
