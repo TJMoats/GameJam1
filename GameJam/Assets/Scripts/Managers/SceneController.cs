@@ -33,10 +33,13 @@ public class SceneController : NPS.SceneController
 
     private void OnTriggerEnter2D(Collider2D _collision)
     {
-        PlayerController player = _collision.gameObject?.GetComponent<PlayerController>();
-        if (player != null)
+        if (Active)
         {
-            SceneHelper.PrimarySceneName = SceneName;
+            PlayerController player = _collision.gameObject?.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                SceneHelper.PrimarySceneName = SceneName;
+            }
         }
     }
 

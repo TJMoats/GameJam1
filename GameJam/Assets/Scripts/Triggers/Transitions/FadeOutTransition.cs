@@ -19,6 +19,15 @@ public class FadeOutTransition : SceneTransition
         get => TransitionType.fade;
     }
 
+    public string MySceneName
+    {
+        get
+        {
+            SceneController sceneController = GetComponentInParent<SceneController>();
+            return sceneController.SceneName;
+        }
+    }
+
     protected override void OnCharacterEnter(CharacterController _characterController)
     {
         if (!Triggered && _characterController == MasterManager.Instance.Player)
